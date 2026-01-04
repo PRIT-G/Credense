@@ -1,0 +1,419 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <title>Admin Dashboard - ValidAIte</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/style.css') }}">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+    <style>
+        .admin-table {
+            width: 100%;
+            border-collapse: collapse;
+            margin-top: 1rem;
+            color: #fff;
+        }
+
+        .admin-table th,
+        .admin-table td {
+            text-align: left;
+            padding: 12px;
+            border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+        }
+
+        .admin-table th {
+            background-color: rgba(255, 255, 255, 0.05);
+        }
+
+        .action-btn {
+            padding: 5px 10px;
+            border-radius: 4px;
+            text-decoration: none;
+            font-size: 0.8rem;
+            margin-right: 5px;
+            cursor: pointer;
+            border: none;
+        }
+
+        .btn-delete {
+            background-color: #ff6b6b;
+            color: white;
+        }
+
+        .btn-update {
+            background-color: #fab005;
+            color: black;
+        }
+
+        .modal {
+            display: none;
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0, 0, 0, 0.7);
+            align-items: center;
+            justify-content: center;
+            z-index: 1000;
+        }
+
+        .modal-content {
+            background: var(--bg-card);
+            padding: 2rem;
+            border-radius: 10px;
+            width: 400px;
+            border: 1px solid var(--border);
+        }
+
+        /* Tabs */
+        .tabs {
+            display: flex;
+            gap: 1rem;
+            margin-bottom: 1rem;
+        }
+
+        .tab-btn {
+            background: transparent;
+            border: 1px solid var(--border);
+            color: #ccc;
+            padding: 8px 16px;
+            cursor: pointer;
+            border-radius: 4px;
+        }
+
+        .tab-btn.active {
+            background: var(--primary);
+            color: white;
+            border-color: var(--primary);
+        }
+
+        .tab-content {
+            display: none;
+        }
+
+        .tab-content.active {
+            display: block;
+        }
+
+        /* Search */
+        .search-bar {
+            width: 100%;
+            padding: 10px;
+            margin-bottom: 1rem;
+            background: rgba(255, 255, 255, 0.05);
+            border: 1px solid var(--border);
+            border-radius: 4px;
+            color: white;
+        }
+    </style>
+</head>
+
+<body>
+    <div class="container">
+        <header style="display: flex; justify-content: space-between; align-items: center;">
+            <a href="/" class="logo">Valid<span>AI</span>te</a>
+            <nav>
+                <span style="margin-right: 1rem; color: #ccc;">Admin Dashboard</span>
+                <a href="{{ url_for('auth.logout') }}" class="btn btn-secondary">Logout</a>
+            </nav>
+        </header>
+
+        <section style="margin-top: 2rem;">
+            {% with messages = get_flashed_messages(with_categories=true) %}
+            {% if messages %}
+            <ul class="flashes" style="list-style: none; padding: 0; margin-bottom: 1rem;">
+                {% for category, message in messages %}
+                <li class="{{ category }}"
+                    style="color: {% if category == 'error' %}#ff6b6b{% else %}#51cf66{% endif %};">{{ message }}</li>
+                {% endfor %}
+            </ul>
+            {% endif %}
+            {% endwith %}
+
+            <div class="glass-card" style="margin-bottom: 2rem;">
+                <h3>Create New User</h3>
+                <form action="{{ url_for('admin.create_user') }}" method="post"
+                    style="display: grid; grid-template-columns: 1fr 1fr 1fr 1fr auto; gap: 10px; align-items: end;">
+                    <div>
+                        <label>Username</label>
+                        <input type="text" name="username" required
+                            style="width: 100%; padding: 8px; border-radius: 4px; border: none;">
+                    </div>
+                    <div>
+                        <label>Password</label>
+                        <input type="text" name="password" required
+                            style="width: 100%; padding: 8px; border-radius: 4px; border: none;">
+                    </div>
+                    <div>
+                        <label>Name</label>
+                        <input type="text" name="name"
+                            style="width: 100%; padding: 8px; border-radius: 4px; border: none;">
+                    </div>
+                    <div>
+                        <label>Role</label>
+                        <select name="role" required
+                            style="width: 100%; padding: 8px; border-radius: 4px; border: none;">
+                            <option value="employee">Employee</option>
+                            <option value="recruiter">Recruiter</option>
+                            <option value="admin">Admin</option>
+                        </select>
+                    </div>
+                    <button type="submit" class="btn btn-primary" style="height: 36px;">Create</button>
+                </form>
+            </div>
+
+            <div class="glass-card">
+                <h3>User Management</h3>
+
+                <input type="text" id="searchInput" class="search-bar" placeholder="Search by name or username..."
+                    onkeyup="filterTable()">
+
+                <div class="tabs">
+                    <button class="tab-btn active" onclick="openTab(event, 'employees')">Employees</button>
+                    <button class="tab-btn" onclick="openTab(event, 'recruiters')">Recruiters</button>
+                    <button class="tab-btn" onclick="openTab(event, 'admins')">Admins</button>
+                    <button class="tab-btn" onclick="openTab(event, 'all')">All</button>
+                </div>
+
+                <!-- Employees Tab -->
+                <div id="employees" class="tab-content active">
+                    <table class="admin-table">
+                        <thead>
+                            <tr>
+                                <th>Username</th>
+                                <th>Name</th>
+                                <th>Role</th>
+                                <th>Password</th>
+                                <th>Actions</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            {% for username, data in users.items() if data.role == 'employee' %}
+                            <tr>
+                                <td>{{ username }}</td>
+                                <td>{{ data.name }}</td>
+                                <td style="color: #51cf66;">EMPLOYEE</td>
+                                <td
+                                    style="font-family: monospace; font-size: 0.8rem; max-width: 150px; overflow: hidden; text-overflow: ellipsis; white-space: nowrap;">
+                                    {{ data.password }}</td>
+                                <td>
+                                    <button class="action-btn btn-update"
+                                        onclick="openUpdateModal('{{ username }}')">UPDATE USER</button>
+                                    <a href="{{ url_for('admin.delete_user', username=username) }}"
+                                        class="action-btn btn-delete"
+                                        onclick="return confirm('Are you sure?')">Delete</a>
+                                </td>
+                            </tr>
+                            {% endfor %}
+                        </tbody>
+                    </table>
+                </div>
+
+                <!-- Recruiters Tab -->
+                <div id="recruiters" class="tab-content">
+                    <table class="admin-table">
+                        <thead>
+                            <tr>
+                                <th>Username</th>
+                                <th>Name</th>
+                                <th>Role</th>
+                                <th>Password</th>
+                                <th>Actions</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            {% for username, data in users.items() if data.role == 'recruiter' %}
+                            <tr>
+                                <td>{{ username }}</td>
+                                <td>{{ data.name }}</td>
+                                <td style="color: #339af0;">RECRUITER</td>
+                                <td
+                                    style="font-family: monospace; font-size: 0.8rem; max-width: 150px; overflow: hidden; text-overflow: ellipsis; white-space: nowrap;">
+                                    {{ data.password }}</td>
+                                <td>
+                                    <button class="action-btn btn-update"
+                                        onclick="openUpdateModal('{{ username }}')">UPDATE USER</button>
+                                    <a href="{{ url_for('admin.delete_user', username=username) }}"
+                                        class="action-btn btn-delete"
+                                        onclick="return confirm('Are you sure?')">Delete</a>
+                                </td>
+                            </tr>
+                            {% endfor %}
+                        </tbody>
+                    </table>
+                </div>
+
+                <!-- Admins Tab -->
+                <div id="admins" class="tab-content">
+                    <table class="admin-table">
+                        <thead>
+                            <tr>
+                                <th>Username</th>
+                                <th>Name</th>
+                                <th>Role</th>
+                                <th>Password</th>
+                                <th>Actions</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            {% for username, data in users.items() if data.role == 'admin' %}
+                            <tr>
+                                <td>{{ username }}</td>
+                                <td>{{ data.name }}</td>
+                                <td style="color: #fab005;">ADMIN</td>
+                                <td
+                                    style="font-family: monospace; font-size: 0.8rem; max-width: 150px; overflow: hidden; text-overflow: ellipsis; white-space: nowrap;">
+                                    {{ data.password }}</td>
+                                <td>
+                                    <button class="action-btn btn-update"
+                                        onclick="openUpdateModal('{{ username }}', '{{ data.name }}')">UPDATE
+                                        USER</button>
+                                    {% if username != 'admin' %}
+                                    <a href="{{ url_for('admin.delete_user', username=username) }}"
+                                        class="action-btn btn-delete"
+                                        onclick="return confirm('Are you sure?')">DELETE</a>
+                                    {% endif %}
+                                </td>
+                            </tr>
+                            {% endfor %}
+                        </tbody>
+                    </table>
+                </div>
+
+                <!-- All Tab -->
+                <div id="all" class="tab-content">
+                    <table class="admin-table">
+                        <thead>
+                            <tr>
+                                <th>Username</th>
+                                <th>Name</th>
+                                <th>Role</th>
+                                <th>Password</th>
+                                <th>Actions</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            {% for username, data in users.items() %}
+                            <tr>
+                                <td>{{ username }}</td>
+                                <td>{{ data.name }}</td>
+                                <td>{{ data.role|upper }}</td>
+                                <td
+                                    style="font-family: monospace; font-size: 0.8rem; max-width: 150px; overflow: hidden; text-overflow: ellipsis; white-space: nowrap;">
+                                    {{ data.password }}</td>
+                                <td>
+                                    <button class="action-btn btn-update"
+                                        onclick="openUpdateModal('{{ username }}', '{{ data.name }}')">UPDATE
+                                        USER</button>
+                                    {% if username != 'admin' %}
+                                    <a href="{{ url_for('admin.delete_user', username=username) }}"
+                                        class="action-btn btn-delete"
+                                        onclick="return confirm('Are you sure?')">Delete</a>
+                                    {% endif %}
+                                </td>
+                            </tr>
+                            {% endfor %}
+                        </tbody>
+                    </table>
+                </div>
+
+            </div>
+        </section>
+    </div>
+
+    <!-- Update User Modal -->
+    <div id="updateModal" class="modal">
+        <div class="modal-content">
+            <h3>Edit User: <span id="modalUsernameDisplay"></span></h3>
+            <form action="{{ url_for('admin.update_user') }}" method="post">
+                <input type="hidden" name="current_username" id="modalCurrentUsername">
+
+                <div style="margin-bottom: 1rem;">
+                    <label>Username</label>
+                    <input type="text" name="new_username" id="modalNewUsername" required
+                        style="width: 100%; padding: 8px; border-radius: 4px; border: 1px solid #ccc;">
+                </div>
+
+                <div style="margin-bottom: 1rem;">
+                    <label>Name</label>
+                    <input type="text" name="name" id="modalName" required
+                        style="width: 100%; padding: 8px; border-radius: 4px; border: 1px solid #ccc;">
+                </div>
+
+                <div style="margin-bottom: 1rem;">
+                    <label>New Password (Leave blank to keep current)</label>
+                    <input type="text" name="new_password" placeholder="New Password"
+                        style="width: 100%; padding: 8px; border-radius: 4px; border: 1px solid #ccc;">
+                </div>
+
+                <div style="display: flex; justify-content: flex-end; gap: 10px;">
+                    <button type="button" class="btn btn-secondary" onclick="closeUpdateModal()">Cancel</button>
+                    <button type="submit" class="btn btn-primary">Update</button>
+                </div>
+            </form>
+        </div>
+    </div>
+
+    <script>
+        function openTab(evt, tabName) {
+            var i, tabcontent, tablinks;
+            tabcontent = document.getElementsByClassName("tab-content");
+            for (i = 0; i < tabcontent.length; i++) {
+                tabcontent[i].style.display = "none";
+                tabcontent[i].className = tabcontent[i].className.replace(" active", "");
+            }
+            tablinks = document.getElementsByClassName("tab-btn");
+            for (i = 0; i < tablinks.length; i++) {
+                tablinks[i].className = tablinks[i].className.replace(" active", "");
+            }
+            document.getElementById(tabName).style.display = "block";
+            document.getElementById(tabName).className += " active";
+            evt.currentTarget.className += " active";
+        }
+
+        function filterTable() {
+            var input, filter, tabcontent, table, tr, td, i, j, txtValue;
+            input = document.getElementById("searchInput");
+            filter = input.value.toUpperCase();
+
+            // Allow filtering across all visible tables (active tab)
+            tabcontent = document.getElementsByClassName("tab-content active");
+            if (tabcontent.length > 0) {
+                table = tabcontent[0].getElementsByTagName("table")[0];
+                tr = table.getElementsByTagName("tr");
+                for (i = 1; i < tr.length; i++) {
+                    tr[i].style.display = "none";
+                    td = tr[i].getElementsByTagName("td");
+                    for (j = 0; j < td.length; j++) {
+                        if (td[j]) {
+                            txtValue = td[j].textContent || td[j].innerText;
+                            if (txtValue.toUpperCase().indexOf(filter) > -1) {
+                                tr[i].style.display = "";
+                                break;
+                            }
+                        }
+                    }
+                }
+            }
+        }
+
+        function openUpdateModal(username, name) {
+            document.getElementById('updateModal').style.display = 'flex';
+            document.getElementById('modalUsernameDisplay').innerText = username;
+            document.getElementById('modalCurrentUsername').value = username;
+            document.getElementById('modalNewUsername').value = username;
+            document.getElementById('modalName').value = name;
+        }
+        function closeUpdateModal() {
+            document.getElementById('updateModal').style.display = 'none';
+        }
+        window.onclick = function (event) {
+            if (event.target == document.getElementById('updateModal')) {
+                closeUpdateModal();
+            }
+        }
+    </script>
+</body>
+
+</html>

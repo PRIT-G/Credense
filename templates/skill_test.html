@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <title>Skill Assessment - ValidAIte</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/style.css') }}">
+</head>
+
+<body>
+    <div class="container">
+        <header>
+            <a href="/" class="logo">Valid<span>AI</span>te</a>
+        </header>
+
+        <form action="{{ url_for('test.submit_test') }}" method="post" id="quizForm">
+            <div class="quiz-container">
+                <div class="glass-card"
+                    style="position: sticky; top: 20px; z-index: 100; margin-bottom: 2rem; display: flex; justify-content: space-between; align-items: center;">
+                    <h3>Skill Assessment</h3>
+                    <div id="timer" style="font-weight: 700; color: var(--secondary);">10:00</div>
+                </div>
+
+                {% for q in questions %}
+                <div class="glass-card question-card">
+                    <p style="color: var(--secondary); font-size: 0.9rem; margin-bottom: 0.5rem;">Question {{ loop.index
+                        }} • {{ q.skill|upper }}</p>
+                    <h3 style="margin-bottom: 1rem;">{{ q.question }}</h3>
+
+                    <div class="options-grid">
+                        {% for option in q.options %}
+                        <label class="option-btn">
+                            <input type="radio" name="q_{{ q.id }}" value="{{ option }}" style="display: none;"
+                                onchange="selectOption(this)">
+                            {{ option }}
+                        </label>
+                        {% endfor %}
+                    </div>
+                </div>
+                {% endfor %}
+
+                <div style="text-align: center; margin-top: 3rem; padding-bottom: 4rem;">
+                    <button type="submit" class="btn btn-primary">Submit Assessment</button>
+                </div>
+            </div>
+        </form>
+    </div>
+
+    <script src="{{ url_for('static', filename='js/test.js') }}"></script>
+    <script>
+        function selectOption(radio) {
+            // Remove selected class from all labels in this group
+            const groupName = radio.name;
+            const container = radio.closest('.options-grid');
+            const allRadios = container.querySelectorAll(`input[name="${groupName}"]`);
+            allRadios.forEach(r => r.closest('label').classList.remove('selected'));
+
+            // Add selected to clicked
+            radio.closest('label').classList.add('selected');
+        }
+    </script>
+</body>
+
+</html>

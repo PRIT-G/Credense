@@ -1,0 +1,197 @@
+[
+    {
+        "id": 1,
+        "question": "What is the binary representation of the decimal number 10?",
+        "options": [
+            "1010",
+            "1100",
+            "1001",
+            "1111"
+        ],
+        "answer": "1010",
+        "level": "Junior",
+        "skill": "General CS"
+    },
+    {
+        "id": 2,
+        "question": "Which of these is a non-volatile memory?",
+        "options": [
+            "RAM",
+            "ROM",
+            "Cache",
+            "Register"
+        ],
+        "answer": "ROM",
+        "level": "Junior",
+        "skill": "General CS"
+    },
+    {
+        "id": 3,
+        "question": "What does CPU stand for?",
+        "options": [
+            "Central Processing Unit",
+            "Central Program Unit",
+            "Computer Personal Unit",
+            "Central Processor Universal"
+        ],
+        "answer": "Central Processing Unit",
+        "level": "Junior",
+        "skill": "General CS"
+    },
+    {
+        "id": 4,
+        "question": "What is an 'Algorithm'?",
+        "options": [
+            "A programming language",
+            "A step-by-step procedure for solving a problem",
+            "A type of hardware",
+            "A database"
+        ],
+        "answer": "A step-by-step procedure for solving a problem",
+        "level": "Junior",
+        "skill": "General CS"
+    },
+    {
+        "id": 5,
+        "question": "Which of these is an example of an open-source operating system?",
+        "options": [
+            "Windows",
+            "macOS",
+            "Linux",
+            "iOS"
+        ],
+        "answer": "Linux",
+        "level": "Junior",
+        "skill": "General CS"
+    },
+    {
+        "id": 6,
+        "question": "What is the main purpose of a Compiler?",
+        "options": [
+            "To run the program",
+            "To translate high-level code into machine code",
+            "To design graphics",
+            "To connect to the internet"
+        ],
+        "answer": "To translate high-level code into machine code",
+        "level": "Junior",
+        "skill": "General CS"
+    },
+    {
+        "id": 7,
+        "question": "In software engineering, what does DRY stand for?",
+        "options": [
+            "Don't Repeat Yourself",
+            "Do Repeat Yesterday",
+            "Data Runtime Yield",
+            "Direct Resource Yield"
+        ],
+        "answer": "Don't Repeat Yourself",
+        "level": "Intermediate",
+        "skill": "General CS"
+    },
+    {
+        "id": 8,
+        "question": "What is 'Moore's Law'?",
+        "options": [
+            "The speed of software doubles every 2 years",
+            "The number of transistors on a microchip doubles about every two years",
+            "Internet speed doubles every year",
+            "Storage costs double every 5 years"
+        ],
+        "answer": "The number of transistors on a microchip doubles about every two years",
+        "level": "Intermediate",
+        "skill": "General CS"
+    },
+    {
+        "id": 9,
+        "question": "What is the time complexity of a binary search?",
+        "options": [
+            "O(n)",
+            "O(log n)",
+            "O(n^2)",
+            "O(1)"
+        ],
+        "answer": "O(log n)",
+        "level": "Intermediate",
+        "skill": "General CS"
+    },
+    {
+        "id": 10,
+        "question": "What is the difference between a process and a thread?",
+        "options": [
+            "Threads are larger than processes",
+            "Processes share memory, threads do not",
+            "Threads are part of a process and share its resources",
+            "There is no difference"
+        ],
+        "answer": "Threads are part of a process and share its resources",
+        "level": "Senior",
+        "skill": "General CS"
+    },
+    {
+        "id": 11,
+        "question": "What is 'Big O' notation used for?",
+        "options": [
+            "Measuring space complexity only",
+            "Describing the efficiency of an algorithm in terms of time or space as input size grows",
+            "Naming variables",
+            "Formatting code"
+        ],
+        "answer": "Describing the efficiency of an algorithm in terms of time or space as input size grows",
+        "level": "Intermediate",
+        "skill": "General CS"
+    },
+    {
+        "id": 12,
+        "question": "What is the purpose of a 'Load Balancer' in system design?",
+        "options": [
+            "To charge the battery",
+            "To distribute incoming network traffic across multiple servers",
+            "To increase CPU speed",
+            "To backup data"
+        ],
+        "answer": "To distribute incoming network traffic across multiple servers",
+        "level": "Senior",
+        "skill": "General CS"
+    },
+    {
+        "id": 13,
+        "question": "What is 'Microservices Architecture'?",
+        "options": [
+            "Small computers",
+            "An architectural style that structures an application as a collection of services",
+            "Single monolithic application",
+            "Using only mini-JS libraries"
+        ],
+        "answer": "An architectural style that structures an application as a collection of services",
+        "level": "Senior",
+        "skill": "General CS"
+    },
+    {
+        "id": 14,
+        "question": "What is 'Unit Testing'?",
+        "options": [
+            "Testing the whole system",
+            "Testing individual components of software in isolation",
+            "Testing by users",
+            "Testing the network"
+        ],
+        "answer": "Testing individual components of software in isolation",
+        "level": "Intermediate",
+        "skill": "General CS"
+    },
+    {
+        "id": 15,
+        "question": "What is 'Cloud Computing'?",
+        "options": [
+            "Computing in the weather station",
+            "On-demand availability of computer system resources over the internet",
+            "A type of flying server",
+            "Computing with steam"
+        ],
+        "answer": "On-demand availability of computer system resources over the internet",
+        "level": "Junior",
+        "skill": "General CS"
+    }
+]

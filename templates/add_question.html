@@ -1,0 +1,78 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <title>Add Question - ValidAIte</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/style.css') }}">
+</head>
+
+<body>
+    <div class="container">
+        <header>
+            <a href="/" class="logo">Valid<span>AI</span>te</a>
+            <nav>
+                <a href="{{ url_for('recruiter.logout') }}"
+                    style="color: var(--text-gray); text-decoration: none;">Logout</a>
+            </nav>
+        </header>
+
+        <section class="glass-card" style="max-width: 800px; margin: 4rem auto;">
+            <h2 style="margin-bottom: 2rem; text-align: center;">Add New Question</h2>
+
+
+            <form action="{{ url_for('recruiter.add_question') }}" method="post">
+                <div style="margin-bottom: 1rem;">
+                    <label>Skill Category</label>
+                    <select name="skill"
+                        style="width: 100%; padding: 10px; border-radius: 8px; background: var(--bg-card); color: white; border: 1px solid var(--border); margin-top: 5px;">
+                        <option value="python">Python</option>
+                        <option value="sql">SQL</option>
+                        <option value="ml">Machine Learning</option>
+                        <option value="dsa">DSA</option>
+                        <option value="web">Web Development</option>
+                    </select>
+                </div>
+
+                <div style="margin-bottom: 1rem;">
+                    <label>Question Text</label>
+                    <textarea name="question" rows="3"
+                        style="width: 100%; padding: 10px; border-radius: 8px; background: var(--bg-card); color: white; border: 1px solid var(--border); margin-top: 5px;"></textarea>
+                </div>
+
+                <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 1rem;">
+                    <div>
+                        <label>Option 1</label>
+                        <input type="text" name="option1"
+                            style="width: 100%; padding: 10px; border-radius: 8px; background: var(--bg-card); color: white; border: 1px solid var(--border); margin-top: 5px;">
+                    </div>
+                    <div>
+                        <label>Option 2</label>
+                        <input type="text" name="option2"
+                            style="width: 100%; padding: 10px; border-radius: 8px; background: var(--bg-card); color: white; border: 1px solid var(--border); margin-top: 5px;">
+                    </div>
+                    <div>
+                        <label>Option 3</label>
+                        <input type="text" name="option3"
+                            style="width: 100%; padding: 10px; border-radius: 8px; background: var(--bg-card); color: white; border: 1px solid var(--border); margin-top: 5px;">
+                    </div>
+                    <div>
+                        <label>Option 4</label>
+                        <input type="text" name="option4"
+                            style="width: 100%; padding: 10px; border-radius: 8px; background: var(--bg-card); color: white; border: 1px solid var(--border); margin-top: 5px;">
+                    </div>
+                </div>
+
+                <div style="margin-top: 1rem; margin-bottom: 2rem;">
+                    <label>Correct Answer (Must match one option exactly)</label>
+                    <input type="text" name="correct_answer"
+                        style="width: 100%; padding: 10px; border-radius: 8px; background: var(--bg-card); color: white; border: 1px solid var(--border); margin-top: 5px;">
+                </div>
+
+                <button type="submit" class="btn btn-primary" style="width: 100%;">Add to Bank</button>
+            </form>
+        </section>
+    </div>
+</body>
+
+</html>

@@ -1,0 +1,86 @@
+[
+    {
+        "id": 1,
+        "question": "What is the primary difference between TCP and UDP?",
+        "options": [
+            "TCP is faster, UDP is more reliable",
+            "TCP is connection-oriented and reliable, UDP is connectionless and faster",
+            "UDP uses IP, TCP does not",
+            "None of the above"
+        ],
+        "answer": "TCP is connection-oriented and reliable, UDP is connectionless and faster",
+        "level": "Junior"
+    },
+    {
+        "id": 2,
+        "question": "Which layer of the OSI model is responsible for routing?",
+        "options": [
+            "Physical",
+            "Data Link",
+            "Network",
+            "Transport"
+        ],
+        "answer": "Network",
+        "level": "Junior"
+    },
+    {
+        "id": 3,
+        "question": "What does DNS stand for?",
+        "options": [
+            "Digital Network Service",
+            "Domain Name System",
+            "Data Network System",
+            "Domain Network Service"
+        ],
+        "answer": "Domain Name System",
+        "level": "Junior"
+    },
+    {
+        "id": 4,
+        "question": "What is the purpose of the 'Three-way Handshake' in TCP?",
+        "options": [
+            "To encrypt data",
+            "To establish a reliable connection between two hosts",
+            "To speed up data transfer",
+            "To terminate a connection"
+        ],
+        "answer": "To establish a reliable connection between two hosts",
+        "level": "Intermediate"
+    },
+    {
+        "id": 5,
+        "question": "What is an 'IP version 6 (IPv6)' address length?",
+        "options": [
+            "32 bits",
+            "64 bits",
+            "128 bits",
+            "256 bits"
+        ],
+        "answer": "128 bits",
+        "level": "Intermediate"
+    },
+    {
+        "id": 6,
+        "question": "What is 'Subnetting'?",
+        "options": [
+            "Combining networks",
+            "The process of dividing a single network into multiple smaller networks",
+            "Connecting to the internet",
+            "A type of cable"
+        ],
+        "answer": "The process of dividing a single network into multiple smaller networks",
+        "level": "Senior"
+    },
+    {
+        "id": 7,
+        "question": "Which protocol is used to map an IP address to a physical MAC address?",
+        "options": [
+            "DNS",
+            "DHCP",
+            "ARP",
+            "ICMP"
+        ],
+        "answer": "ARP",
+        "level": "Senior"
+    }
+]

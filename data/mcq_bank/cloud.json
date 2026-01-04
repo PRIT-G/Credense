@@ -1,0 +1,86 @@
+[
+    {
+        "id": 1,
+        "question": "What does 'SaaS' stand for?",
+        "options": [
+            "System as a Service",
+            "Software as a Service",
+            "Storage as a Service",
+            "Server as a Service"
+        ],
+        "answer": "Software as a Service",
+        "level": "Junior"
+    },
+    {
+        "id": 2,
+        "question": "Which of these is a Public Cloud provider?",
+        "options": [
+            "AWS",
+            "GitHub",
+            "Excel",
+            "Spotify"
+        ],
+        "answer": "AWS",
+        "level": "Junior"
+    },
+    {
+        "id": 3,
+        "question": "What is 'Scalability' in Cloud Computing?",
+        "options": [
+            "The ability to increase or decrease resources based on demand",
+            "The size of the server",
+            "The speed of the network",
+            "A type of database"
+        ],
+        "answer": "The ability to increase or decrease resources based on demand",
+        "level": "Junior"
+    },
+    {
+        "id": 4,
+        "question": "What is 'Serverless Computing'?",
+        "options": [
+            "Computing without servers",
+            "A model where the cloud provider manages the server infrastructure automatically",
+            "Using only local computers",
+            "A marketing term"
+        ],
+        "answer": "A model where the cloud provider manages the server infrastructure automatically",
+        "level": "Intermediate"
+    },
+    {
+        "id": 5,
+        "question": "What is 'Docker' used for?",
+        "options": [
+            "To ship goods",
+            "To create, deploy, and run applications by using containers",
+            "To write code",
+            "To host websites"
+        ],
+        "answer": "To create, deploy, and run applications by using containers",
+        "level": "Intermediate"
+    },
+    {
+        "id": 6,
+        "question": "What is 'Kubernetes' (K8s)?",
+        "options": [
+            "A programming language",
+            "An open-source container-orchestration system for automating application deployment, scaling, and management",
+            "A type of cloud",
+            "A database system"
+        ],
+        "answer": "An open-source container-orchestration system for automating application deployment, scaling, and management",
+        "level": "Senior"
+    },
+    {
+        "id": 7,
+        "question": "What is 'Infrastructure as Code' (IaC)?",
+        "options": [
+            "Writing code for websites",
+            "Managing and provisioning computer data centers through machine-readable definition files",
+            "A type of compiler",
+            "A hardware manual"
+        ],
+        "answer": "Managing and provisioning computer data centers through machine-readable definition files",
+        "level": "Senior"
+    }
+]

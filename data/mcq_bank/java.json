@@ -1,0 +1,98 @@
+[
+    {
+        "id": 1,
+        "question": "Which keyword is used to prevent method overriding in Java?",
+        "options": [
+            "static",
+            "final",
+            "abstract",
+            "protected"
+        ],
+        "answer": "final",
+        "level": "Junior"
+    },
+    {
+        "id": 2,
+        "question": "What is the difference between '==' and '.equals()' in Java for strings?",
+        "options": [
+            "No difference",
+            "== compares primitive values, .equals() compares objects",
+            "== compares references, .equals() compares values",
+            "== is for integers only"
+        ],
+        "answer": "== compares references, .equals() compares values",
+        "level": "Junior"
+    },
+    {
+        "id": 3,
+        "question": "What is 'Garbage Collection' in Java?",
+        "options": [
+            "A way to delete files",
+            "Automatic memory management that reclaims heap memory",
+            "A manual process to free memory",
+            "A way to clean code"
+        ],
+        "answer": "Automatic memory management that reclaims heap memory",
+        "level": "Junior"
+    },
+    {
+        "id": 4,
+        "question": "What is the 'JVM' (Java Virtual Machine)?",
+        "options": [
+            "A hardware component",
+            "An engine that provides runtime environment to drive the Java Code or applications",
+            "A database",
+            "A compiler"
+        ],
+        "answer": "An engine that provides runtime environment to drive the Java Code or applications",
+        "level": "Junior"
+    },
+    {
+        "id": 5,
+        "question": "What is 'Dependency Injection'?",
+        "options": [
+            "A security vulnerability",
+            "A design pattern where an object receives other objects that it depends on",
+            "A way to inject data into database",
+            "A type of virus"
+        ],
+        "answer": "A design pattern where an object receives other objects that it depends on",
+        "level": "Intermediate"
+    },
+    {
+        "id": 6,
+        "question": "Which stream is used to read data from a file in Java?",
+        "options": [
+            "FileWriter",
+            "FileReader",
+            "InputStream",
+            "FileInputStream"
+        ],
+        "answer": "FileInputStream",
+        "level": "Intermediate"
+    },
+    {
+        "id": 7,
+        "question": "What is 'Multi-threading' in Java?",
+        "options": [
+            "Running multiple programs at once",
+            "A process of executing multiple threads simultaneously",
+            "Connecting multiple computers",
+            "Using multiple screens"
+        ],
+        "answer": "A process of executing multiple threads simultaneously",
+        "level": "Intermediate"
+    },
+    {
+        "id": 8,
+        "question": "What is 'Java Reflection' API used for?",
+        "options": [
+            "To mirror code",
+            "To examine or modify the runtime behavior of applications running in the Java Virtual Machine",
+            "For UI design",
+            "For database connection"
+        ],
+        "answer": "To examine or modify the runtime behavior of applications running in the Java Virtual Machine",
+        "level": "Senior"
+    }
+]

@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <title>Detected Skills - ValidAIte</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/style.css') }}">
+</head>
+
+<body>
+    <div class="container">
+        <header>
+            <a href="/" class="logo">Valid<span>AI</span>te</a>
+        </header>
+
+        <section class="glass-card" style="max-width: 800px; margin: 4rem auto;">
+            <h2>Analysis Complete</h2>
+            <p style="color: var(--text-gray); margin-bottom: 2rem;">We detected the following key skills from the
+                resume:</p>
+
+            <div class="skill-tags">
+                {% for skill in skills %}
+                <span class="tag">{{ skill|upper }}</span>
+                {% else %}
+                <p>No specific technical skills detected from our curated list.</p>
+                {% endfor %}
+            </div>
+
+            <div style="margin-top: 1.5rem; padding: 1rem; background: rgba(255,255,255,0.05); border-radius: 8px;">
+                <p><strong>Detected Expertise Level:</strong> <span style="color: var(--primary);">{{ level }}</span>
+                </p>
+                <p style="font-size: 0.9rem; color: var(--text-gray);">Questions in the test will be tailored to this
+                    level.</p>
+            </div>
+
+            <div style="margin-top: 3rem; text-align: center;">
+                <p style="margin-bottom: 1rem;">Ready to generate a validation test based on these skills?</p>
+                <form action="{{ url_for('test.start_test') }}" method="post">
+                    <button type="submit" class="btn btn-primary">Generate Test</button>
+                </form>
+            </div>
+        </section>
+    </div>
+</body>
+
+</html>

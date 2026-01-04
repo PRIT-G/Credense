@@ -1,0 +1,323 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <title>Recruiter Dashboard - ValidAIte</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/style.css') }}">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+    <style>
+        .data-table {
+            width: 100%;
+            border-collapse: collapse;
+            color: #fff;
+            margin-bottom: 2rem;
+        }
+
+        .data-table th,
+        .data-table td {
+            text-align: left;
+            padding: 10px;
+            border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+        }
+
+        .data-table th {
+            background-color: rgba(255, 255, 255, 0.05);
+        }
+
+        .high-score {
+            color: #fab005;
+            font-weight: bold;
+        }
+
+        .tabs {
+            display: flex;
+            gap: 1rem;
+            margin-bottom: 1rem;
+        }
+
+        .tab-btn {
+            background: transparent;
+            border: 1px solid var(--border);
+            color: #ccc;
+            padding: 8px 16px;
+            cursor: pointer;
+            border-radius: 4px;
+        }
+
+        .tab-btn.active {
+            background: var(--primary);
+            color: white;
+            border-color: var(--primary);
+        }
+
+        .tab-content {
+            display: none;
+        }
+
+        .tab-content.active {
+            display: block;
+        }
+
+        .modal {
+            display: none;
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0, 0, 0, 0.7);
+            align-items: center;
+            justify-content: center;
+            z-index: 1000;
+        }
+
+        .modal-content {
+            background: var(--bg-card);
+            padding: 2rem;
+            border-radius: 10px;
+            width: 500px;
+            border: 1px solid var(--border);
+            max-height: 80vh;
+            overflow-y: auto;
+        }
+
+        input,
+        textarea,
+        select {
+            background: var(--bg-card);
+            border: 1px solid var(--border);
+            color: white;
+            padding: 8px;
+            border-radius: 4px;
+        }
+
+        .question-card {
+            background: rgba(255, 255, 255, 0.05);
+            padding: 15px;
+            margin-bottom: 10px;
+            border-radius: 8px;
+        }
+    </style>
+</head>
+
+<body>
+    <div class="container">
+        <header style="display: flex; justify-content: space-between; align-items: center;">
+            <a href="/" class="logo">Valid<span>AI</span>te</a>
+            <nav>
+                <span style="margin-right: 1rem; color: #ccc;">Recruiter Dashboard</span>
+                <a href="{{ url_for('auth.logout') }}" class="btn btn-secondary">Logout</a>
+            </nav>
+        </header>
+
+        <section style="margin-top: 2rem;">
+            {% with messages = get_flashed_messages(with_categories=true) %}
+            {% if messages %}
+            <ul class="flashes" style="list-style: none; padding: 0; margin-bottom: 1rem;">
+                {% for category, message in messages %}
+                <li class="{{ category }}"
+                    style="color: {% if category == 'error' %}#ff6b6b{% else %}#51cf66{% endif %};">{{ message }}</li>
+                {% endfor %}
+            </ul>
+            {% endif %}
+            {% endwith %}
+
+            <div class="tabs">
+                <button class="tab-btn active" onclick="openTab(event, 'employees')">Employees & Scores</button>
+                <button class="tab-btn" onclick="openTab(event, 'questions')">Manage Questions</button>
+            </div>
+
+            <div id="employees" class="tab-content active glass-card">
+                <h3>Employee Performance</h3>
+                <table class="data-table">
+                    <thead>
+                        <tr>
+                            <th>Name</th>
+                            <th>Username</th>
+                            <th>Scores</th>
+                            <th>Credentials</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        {% for username, employee in employees.items() %}
+                        <tr>
+                            <td>{{ employee.name }}</td>
+                            <td>{{ username }}</td>
+                            <td>
+                                {% if employee.scores %}
+                                {% for skill, score in employee.scores.items() %}
+                                <div>{{ skill }}: <span class="{{ 'high-score' if score|int > 80 else '' }}">{{ score
+                                        }}%</span></div>
+                                {% endfor %}
+                                {% else %}
+                                <span style="color: #aaa;">No tests taken</span>
+                                {% endif %}
+                            </td>
+                            <td style="font-family: monospace; font-size: 0.8rem;">
+                                {{ employee.password }}
+                            </td>
+                        </tr>
+                        {% endfor %}
+                    </tbody>
+                </table>
+            </div>
+
+            <div id="questions" class="tab-content glass-card">
+                <h3>Question Bank</h3>
+
+                <div style="margin-bottom: 2rem; border-bottom: 1px solid var(--border); padding-bottom: 2rem;">
+                    <h4>Add New Question</h4>
+                    <form action="{{ url_for('recruiter.add_question') }}" method="post"
+                        style="display: grid; gap: 10px;">
+                        <label>Skill (Type to add new)</label>
+                        <input type="text" name="skill" list="skill_suggestions" required style="width: 100%;"
+                            placeholder="e.g. Java, C++, Cloud">
+                        <datalist id="skill_suggestions">
+                            <option value="python">
+                            <option value="sql">
+                            <option value="ml">
+                            <option value="dsa">
+                            <option value="web">
+                            <option value="c">
+                            <option value="cpp">
+                            <option value="java">
+                            <option value="computernetwork">
+                            <option value="os">
+                            <option value="cloud">
+                        </datalist>
+
+                        <textarea name="question" placeholder="Question Text" required style="width: 100%;"></textarea>
+
+                        <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 10px;">
+                            <input type="text" name="option1" placeholder="Option 1" required>
+                            <input type="text" name="option2" placeholder="Option 2" required>
+                            <input type="text" name="option3" placeholder="Option 3" required>
+                            <input type="text" name="option4" placeholder="Option 4" required>
+                        </div>
+
+                        <input type="text" name="correct_answer" placeholder="Correct Answer (Copy exact option text)"
+                            required style="width: 100%;">
+
+                        <button type="submit" class="btn btn-primary" style="width: auto; justify-self: start;">Add
+                            Question</button>
+                    </form>
+                </div>
+
+                <h4>Existing Questions</h4>
+                {% for skill, questions in questions_data.items() %}
+                <div style="margin-bottom: 1rem;">
+                    <h5 style="color: var(--primary); text-transform: uppercase;">{{ skill }} ({{ questions|length }})
+                    </h5>
+                    <div style="max-height: 300px; overflow-y: auto;">
+                        {% for q in questions %}
+                        <div class="question-card">
+                            <p style="font-weight: bold; margin-bottom: 0.5rem;">{{ loop.index }}. {{ q.question }}</p>
+                            <ul style="padding-left: 1.5rem; margin-bottom: 0.5rem; font-size: 0.9rem; color: #ccc;">
+                                {% for opt in q.options %}
+                                <li {% if opt==q.answer %}style="color: #51cf66;" {% endif %}>{{ opt }}</li>
+                                {% endfor %}
+                            </ul>
+                            <div style="display: flex; gap: 10px;">
+                                <button class="btn btn-update"
+                                    style="padding: 4px 8px; font-size: 0.8rem; background: #fab005; color: black;"
+                                    data-skill="{{ skill }}" data-question="{{ q|tojson|forceescape }}"
+                                    onclick="openEditModal(this)">Edit</button>
+                                <a href="{{ url_for('recruiter.delete_question', skill=skill, q_id=q.id) }}"
+                                    class="btn btn-delete"
+                                    style="padding: 4px 8px; font-size: 0.8rem; background: #ff6b6b; color: white; text-decoration: none; border-radius: 4px;"
+                                    onclick="return confirm('Delete this question?')">Delete</a>
+                            </div>
+                        </div>
+                        {% endfor %}
+                    </div>
+                </div>
+                {% endfor %}
+            </div>
+        </section>
+    </div>
+
+    <!-- Edit Modal -->
+    <div id="editModal" class="modal">
+        <div class="modal-content">
+            <h3 style="margin-bottom: 1rem;">Edit Question</h3>
+            <form action="{{ url_for('recruiter.edit_question') }}" method="post" style="display: grid; gap: 10px;">
+                <input type="hidden" name="skill" id="editSkill">
+                <input type="hidden" name="q_id" id="editQId">
+
+                <label>Question</label>
+                <textarea name="question" id="editQuestion" required style="width: 100%; rows: 3;"></textarea>
+
+                <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 10px;">
+                    <input type="text" name="option1" id="editOpt1" required>
+                    <input type="text" name="option2" id="editOpt2" required>
+                    <input type="text" name="option3" id="editOpt3" required>
+                    <input type="text" name="option4" id="editOpt4" required>
+                </div>
+
+                <label>Correct Answer</label>
+                <input type="text" name="correct_answer" id="editAnswer" required style="width: 100%;">
+
+                <div style="display: flex; justify-content: flex-end; gap: 10px; margin-top: 1rem;">
+                    <button type="button" class="btn btn-secondary" onclick="closeEditModal()">Cancel</button>
+                    <button type="submit" class="btn btn-primary">Save Changes</button>
+                </div>
+            </form>
+        </div>
+    </div>
+
+    <script>
+        function openTab(evt, tabName) {
+            var i, tabcontent, tablinks;
+            tabcontent = document.getElementsByClassName("tab-content");
+            for (i = 0; i < tabcontent.length; i++) {
+                tabcontent[i].style.display = "none";
+                tabcontent[i].classList.remove("active");
+            }
+            tablinks = document.getElementsByClassName("tab-btn");
+            for (i = 0; i < tablinks.length; i++) {
+                tablinks[i].className = tablinks[i].className.replace(" active", "");
+            }
+            document.getElementById(tabName).style.display = "block";
+            document.getElementById(tabName).classList.add("active");
+            evt.currentTarget.className += " active";
+        }
+
+        function openEditModal(btn) {
+            var skill = btn.dataset.skill;
+            var questionData = JSON.parse(btn.dataset.question);
+
+            document.getElementById('editModal').style.display = 'flex';
+            document.getElementById('editSkill').value = skill;
+            document.getElementById('editQId').value = questionData.id;
+            document.getElementById('editQuestion').value = questionData.question;
+            document.getElementById('editOpt1').value = questionData.options[0];
+            document.getElementById('editOpt2').value = questionData.options[1];
+            document.getElementById('editOpt3').value = questionData.options[2];
+            document.getElementById('editOpt4').value = questionData.options[3];
+            document.getElementById('editAnswer').value = questionData.answer;
+        }
+
+        function closeEditModal() {
+            document.getElementById('editModal').style.display = 'none';
+        }
+
+        window.onclick = function (event) {
+            if (event.target == document.getElementById('editModal')) {
+                closeEditModal();
+            }
+        }
+
+        document.addEventListener('DOMContentLoaded', function () {
+            const urlParams = new URLSearchParams(window.location.search);
+            const tabName = urlParams.get('tab');
+            if (tabName === 'questions') {
+                // Simulate click on the questions tab button
+                const btn = document.querySelector('.tab-btn[onclick*="questions"]');
+                if (btn) btn.click();
+            }
+        });
+    </script>
+</body>
+
+</html>

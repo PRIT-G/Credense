@@ -1,0 +1,86 @@
+[
+    {
+        "id": 1,
+        "question": "What is 'Encapsulation' in C++?",
+        "options": [
+            "Putting data and functions together into a single unit (class)",
+            "Hiding data",
+            "Inheriting data",
+            "Deleting data"
+        ],
+        "answer": "Putting data and functions together into a single unit (class)",
+        "level": "Junior"
+    },
+    {
+        "id": 2,
+        "question": "What is a 'Pointer'?",
+        "options": [
+            "A variable that stores the address of another variable",
+            "A way to highlight text",
+            "A tool for UI",
+            "A type of class"
+        ],
+        "answer": "A variable that stores the address of another variable",
+        "level": "Junior"
+    },
+    {
+        "id": 3,
+        "question": "What is the size of 'char' data type in C++?",
+        "options": [
+            "1 byte",
+            "2 bytes",
+            "4 bytes",
+            "8 bytes"
+        ],
+        "answer": "1 byte",
+        "level": "Junior"
+    },
+    {
+        "id": 4,
+        "question": "What is 'Polymorphism'?",
+        "options": [
+            "Multiple versions of a function/operator",
+            "Mapping data",
+            "Optimizing code",
+            "Cleaning memory"
+        ],
+        "answer": "Multiple versions of a function/operator",
+        "level": "Intermediate"
+    },
+    {
+        "id": 5,
+        "question": "What is a 'Virtual Function'?",
+        "options": [
+            "A function that doesn't exist",
+            "A member function which is declared within a base class and is re-defined by a derived class",
+            "A function in a virtual machine",
+            "A private function"
+        ],
+        "answer": "A member function which is declared within a base class and is re-defined by a derived class",
+        "level": "Intermediate"
+    },
+    {
+        "id": 6,
+        "question": "What is 'RAII' (Resource Acquisition Is Initialization) in C++?",
+        "options": [
+            "A way to initialize variables",
+            "A programming idiom that binds resource life cycle to object life cycle",
+            "A type of array",
+            "A compiler flag"
+        ],
+        "answer": "A programming idiom that binds resource life cycle to object life cycle",
+        "level": "Senior"
+    },
+    {
+        "id": 7,
+        "question": "What are 'Smart Pointers' in C++?",
+        "options": [
+            "Pointers that can think",
+            "Class templates used for automatic memory management",
+            "Normal pointers with custom names",
+            "Pointers used in AI"
+        ],
+        "answer": "Class templates used for automatic memory management",
+        "level": "Senior"
+    }
+]

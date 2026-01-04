@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <title>Assessment Result - ValidAIte</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/style.css') }}">
+</head>
+
+<body>
+    <div class="container">
+        <header>
+            <a href="/" class="logo">Valid<span>AI</span>te</a>
+        </header>
+
+        <section class="glass-card" style="max-width: 600px; margin: 4rem auto; text-align: center;">
+            <h2 style="margin-bottom: 3rem;">Authenticity Score</h2>
+
+            <div class="result-circle" style="--score: {{ score }}" data-score="{{ score }}"></div>
+
+            <h3 style="margin-bottom: 1rem;">
+                {% if score >= 80 %}
+                Excellent! This candidate is highly authentic.
+                {% elif score >= 50 %}
+                Good. The candidate has verified skills.
+                {% else %}
+                Needs Review. Low authenticity score.
+                {% endif %}
+            </h3>
+
+            <p style="color: var(--text-gray); margin-bottom: 3rem;">
+                Tested Skills:
+                {% for skill in skills %}
+                <span>{{ skill|upper }}{% if not loop.last %}, {% endif %}</span>
+                {% endfor %}
+            </p>
+
+            {% if session.get('user') and session.get('user').role == 'employee' %}
+            <a href="{{ url_for('employee.dashboard') }}" class="btn btn-primary">Back to Dashboard</a>
+            {% elif session.get('user') and session.get('user').role == 'recruiter' %}
+            <a href="{{ url_for('recruiter.dashboard') }}" class="btn btn-primary">Back to Dashboard</a>
+            {% else %}
+            <a href="/" class="btn btn-primary">Test Another Candidate</a>
+            {% endif %}
+        </section>
+    </div>
+</body>
+
+</html>

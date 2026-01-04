@@ -1,0 +1,74 @@
+[
+    {
+        "id": 1,
+        "question": "What is the full form of DBMS?",
+        "options": [
+            "Database Management System",
+            "Database Management Service",
+            "Data Business Management System",
+            "Data Base Message System"
+        ],
+        "answer": "Database Management System",
+        "level": "Junior"
+    },
+    {
+        "id": 2,
+        "question": "Which of these is a type of Data Model?",
+        "options": [
+            "Relational Model",
+            "Hierarchical Model",
+            "Network Model",
+            "All of the above"
+        ],
+        "answer": "All of the above",
+        "level": "Junior"
+    },
+    {
+        "id": 3,
+        "question": "What is 'Concurrency Control' in DBMS?",
+        "options": [
+            "Running multiple databases",
+            "Ensuring that multiple transactions can occur simultaneously without conflicts",
+            "Controlling the speed of the database",
+            "Limiting the number of users"
+        ],
+        "answer": "Ensuring that multiple transactions can occur simultaneously without conflicts",
+        "level": "Intermediate"
+    },
+    {
+        "id": 4,
+        "question": "What is a 'Database Schema'?",
+        "options": [
+            "A plan for database security",
+            "A formal language used by database management systems",
+            "The skeleton structure that represents the logical view of the entire database",
+            "A list of users"
+        ],
+        "answer": "The skeleton structure that represents the logical view of the entire database",
+        "level": "Intermediate"
+    },
+    {
+        "id": 5,
+        "question": "What is 'B-Tree' used for in databases?",
+        "options": [
+            "To store images",
+            "For making the database look pretty",
+            "As a data structure to maintain sorted data and allow searches, sequential access, insertions, and deletions in logarithmic time",
+            "To encrypt data"
+        ],
+        "answer": "As a data structure to maintain sorted data and allow searches, sequential access, insertions, and deletions in logarithmic time",
+        "level": "Senior"
+    },
+    {
+        "id": 6,
+        "question": "What is the difference between Logical and Physical Data Independence?",
+        "options": [
+            "No difference",
+            "Logical refers to user view, Physical refers to storage structure",
+            "Physical refers to user view, Logical refers to storage structure",
+            "They are coding terms"
+        ],
+        "answer": "Logical refers to user view, Physical refers to storage structure",
+        "level": "Senior"
+    }
+]

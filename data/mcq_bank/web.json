@@ -1,0 +1,98 @@
+[
+    {
+        "id": 1,
+        "question": "What does CSS stand for?",
+        "options": [
+            "Computer Style Sheets",
+            "Creative Style Sheets",
+            "Cascading Style Sheets",
+            "Colorful Style Sheets"
+        ],
+        "answer": "Cascading Style Sheets",
+        "level": "Junior"
+    },
+    {
+        "id": 2,
+        "question": "Which HTML tag is used to define an internal style sheet?",
+        "options": [
+            "<css>",
+            "<script>",
+            "<style>",
+            "<html>"
+        ],
+        "answer": "<style>",
+        "level": "Junior"
+    },
+    {
+        "id": 3,
+        "question": "What is the correct way to write a JavaScript array?",
+        "options": [
+            "var colors = 'red', 'green', 'blue'",
+            "var colors = (1:'red', 2:'green', 3:'blue')",
+            "var colors = 1 = ('red'), 2 = ('green'), 3 = ('blue')",
+            "var colors = ['red', 'green', 'blue']"
+        ],
+        "answer": "var colors = ['red', 'green', 'blue']",
+        "level": "Junior"
+    },
+    {
+        "id": 4,
+        "question": "Which HTTP method is typically used to update a resource?",
+        "options": [
+            "GET",
+            "POST",
+            "PUT",
+            "DELETE"
+        ],
+        "answer": "PUT",
+        "level": "Intermediate"
+    },
+    {
+        "id": 5,
+        "question": "What does DOM stand for?",
+        "options": [
+            "Document Object Model",
+            "Data Object Management",
+            "Digital Object Mapping",
+            "Document Optimized Memory"
+        ],
+        "answer": "Document Object Model",
+        "level": "Intermediate"
+    },
+    {
+        "id": 6,
+        "question": "What is 'Cross-Site Scripting' (XSS)?",
+        "options": [
+            "A way to share scripts",
+            "A security vulnerability where an attacker injects malicious scripts into content from otherwise trusted websites",
+            "A type of server",
+            "A CSS trick"
+        ],
+        "answer": "A security vulnerability where an attacker injects malicious scripts into content from otherwise trusted websites",
+        "level": "Intermediate"
+    },
+    {
+        "id": 7,
+        "question": "What is 'React Virtual DOM'?",
+        "options": [
+            "A second screen",
+            "A lightweight copy of the real DOM used to improve performance",
+            "A type of cloud database",
+            "A browser feature"
+        ],
+        "answer": "A lightweight copy of the real DOM used to improve performance",
+        "level": "Senior"
+    },
+    {
+        "id": 8,
+        "question": "What is the purpose of 'JWT' (JSON Web Token)?",
+        "options": [
+            "To store large data",
+            "To securely transmit information between parties as a JSON object",
+            "To format JSON",
+            "To speed up websites"
+        ],
+        "answer": "To securely transmit information between parties as a JSON object",
+        "level": "Senior"
+    }
+]

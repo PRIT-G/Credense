@@ -1,0 +1,98 @@
+[
+    {
+        "id": 1,
+        "question": "What does SQL stand for?",
+        "options": [
+            "Structured Query Language",
+            "Simple Query Language",
+            "Strong Query Language",
+            "System Query Language"
+        ],
+        "answer": "Structured Query Language",
+        "level": "Junior"
+    },
+    {
+        "id": 2,
+        "question": "Which SQL statement is used to remove all records from a table without deleting the table itself?",
+        "options": [
+            "DELETE",
+            "REMOVE",
+            "TRUNCATE",
+            "DROP"
+        ],
+        "answer": "TRUNCATE",
+        "level": "Junior"
+    },
+    {
+        "id": 3,
+        "question": "What is a 'Primary Key'?",
+        "options": [
+            "A key that uniquely identifies each record in a table",
+            "A key used for encryption",
+            "The first column in a table",
+            "A key that links to another table"
+        ],
+        "answer": "A key that uniquely identifies each record in a table",
+        "level": "Junior"
+    },
+    {
+        "id": 4,
+        "question": "What is the difference between WHERE and HAVING clauses?",
+        "options": [
+            "No difference",
+            "WHERE filters before grouping, HAVING filters after grouping",
+            "HAVING filters before grouping, WHERE filters after grouping",
+            "WHERE is for SELECT, HAVING is for UPDATE"
+        ],
+        "answer": "WHERE filters before grouping, HAVING filters after grouping",
+        "level": "Intermediate"
+    },
+    {
+        "id": 5,
+        "question": "What is a 'FOREIGN KEY'?",
+        "options": [
+            "A key from another country",
+            "A field that refers to the PRIMARY KEY in another table",
+            "A temporary key",
+            "A key that can be null"
+        ],
+        "answer": "A field that refers to the PRIMARY KEY in another table",
+        "level": "Intermediate"
+    },
+    {
+        "id": 6,
+        "question": "What are ACID properties in a database?",
+        "options": [
+            "Atomicity, Consistency, Isolation, Durability",
+            "Accuracy, Continuity, Integrity, Dependency",
+            "Access, Control, Information, Data",
+            "Automated, Consolidated, Integrated, Distributed"
+        ],
+        "answer": "Atomicity, Consistency, Isolation, Durability",
+        "level": "Senior"
+    },
+    {
+        "id": 7,
+        "question": "What is a 'Database Index' used for?",
+        "options": [
+            "To encrypt data",
+            "To speed up data retrieval",
+            "To save storage space",
+            "To sort the entire table"
+        ],
+        "answer": "To speed up data retrieval",
+        "level": "Senior"
+    },
+    {
+        "id": 8,
+        "question": "What is 'Database Normalization'?",
+        "options": [
+            "Making all data the same type",
+            "Organizing data to reduce redundancy and improve data integrity",
+            "Deleting old data",
+            "Backing up the database"
+        ],
+        "answer": "Organizing data to reduce redundancy and improve data integrity",
+        "level": "Senior"
+    }
+]

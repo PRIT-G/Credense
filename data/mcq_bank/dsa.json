@@ -1,0 +1,110 @@
+[
+    {
+        "id": 1,
+        "question": "What is the time complexity of searching in a balanced Binary Search Tree?",
+        "options": [
+            "O(1)",
+            "O(n)",
+            "O(log n)",
+            "O(n log n)"
+        ],
+        "answer": "O(log n)",
+        "level": "Junior"
+    },
+    {
+        "id": 2,
+        "question": "Which data structure uses LIFO (Last In First Out)?",
+        "options": [
+            "Queue",
+            "Stack",
+            "Linked List",
+            "Array"
+        ],
+        "answer": "Stack",
+        "level": "Junior"
+    },
+    {
+        "id": 3,
+        "question": "What is the average time complexity of QuickSort?",
+        "options": [
+            "O(n)",
+            "O(n^2)",
+            "O(n log n)",
+            "O(log n)"
+        ],
+        "answer": "O(n log n)",
+        "level": "Intermediate"
+    },
+    {
+        "id": 4,
+        "question": "Which algorithm is used to find the shortest path in a weighted graph without negative edges?",
+        "options": [
+            "DFS",
+            "BFS",
+            "Dijkstra's",
+            "Kruskal's"
+        ],
+        "answer": "Dijkstra's",
+        "level": "Intermediate"
+    },
+    {
+        "id": 5,
+        "question": "What is a 'Hash Collision'?",
+        "options": [
+            "When two different keys produce the same hash value",
+            "When a hash table is full",
+            "When a hash function fails to run",
+            "When a key is deleted"
+        ],
+        "answer": "When two different keys produce the same hash value",
+        "level": "Intermediate"
+    },
+    {
+        "id": 6,
+        "question": "What is the space complexity of a recursive implementation of DFS on a tree with height h?",
+        "options": [
+            "O(1)",
+            "O(n)",
+            "O(h)",
+            "O(n^2)"
+        ],
+        "answer": "O(h)",
+        "level": "Senior"
+    },
+    {
+        "id": 7,
+        "question": "Which sorting algorithm is stable?",
+        "options": [
+            "QuickSort",
+            "HeapSort",
+            "MergeSort",
+            "SelectionSort"
+        ],
+        "answer": "MergeSort",
+        "level": "Senior"
+    },
+    {
+        "id": 8,
+        "question": "What is the purpose of the 'Union-Find' data structure?",
+        "options": [
+            "To sort data",
+            "To maintain disjoint sets and perform union/find operations",
+            "To store key-value pairs",
+            "To implement a priority queue"
+        ],
+        "answer": "To maintain disjoint sets and perform union/find operations",
+        "level": "Senior"
+    },
+    {
+        "id": 9,
+        "question": "In a Max-Heap, where is the largest element located?",
+        "options": [
+            "At the leaf",
+            "In the middle",
+            "At the root",
+            "Anywhere"
+        ],
+        "answer": "At the root",
+        "level": "Junior"
+    }
+]

@@ -1,0 +1,146 @@
+[
+    {
+        "id": 1,
+        "question": "What is the output of 'print(type(1/2))' in Python 3?",
+        "options": [
+            "<class 'int'>",
+            "<class 'float'>",
+            "<class 'decimal'>",
+            "<class 'number'>"
+        ],
+        "answer": "<class 'float'>",
+        "level": "Junior"
+    },
+    {
+        "id": 2,
+        "question": "Which data type is immutable?",
+        "options": [
+            "List",
+            "Dictionary",
+            "Tuple",
+            "Set"
+        ],
+        "answer": "Tuple",
+        "level": "Junior"
+    },
+    {
+        "id": 3,
+        "question": "What does the GIL stand for?",
+        "options": [
+            "Global Interpreter Lock",
+            "General Interface Logic",
+            "Global Integration Layer",
+            "Graphical Interface Loader"
+        ],
+        "answer": "Global Interpreter Lock",
+        "level": "Intermediate"
+    },
+    {
+        "id": 4,
+        "question": "How do you create a generator?",
+        "options": [
+            "Using []",
+            "Using {}",
+            "Using yield",
+            "Using gen()"
+        ],
+        "answer": "Using yield",
+        "level": "Intermediate"
+    },
+    {
+        "id": 5,
+        "question": "What is the complexity of searching in a set?",
+        "options": [
+            "O(1)",
+            "O(n)",
+            "O(log n)",
+            "O(n log n)"
+        ],
+        "answer": "O(1)",
+        "level": "Intermediate"
+    },
+    {
+        "id": 6,
+        "question": "What is a 'decorator' in Python?",
+        "options": [
+            "A way to add styles to a string",
+            "A function that takes another function and extends its behavior",
+            "A decorative comment",
+            "A way to define classes"
+        ],
+        "answer": "A function that takes another function and extends its behavior",
+        "level": "Intermediate"
+    },
+    {
+        "id": 7,
+        "question": "Which of these is used for memory management in Python?",
+        "options": [
+            "Reference counting and Garbage Collection",
+            "Manual free() calls",
+            "Stack allocation only",
+            "No memory management"
+        ],
+        "answer": "Reference counting and Garbage Collection",
+        "level": "Senior"
+    },
+    {
+        "id": 8,
+        "question": "What is the difference between @staticmethod and @classmethod?",
+        "options": [
+            "Nothing, they are the same",
+            "@classmethod takes 'cls' as first argument, @staticmethod takes nothing",
+            "@staticmethod takes 'self', @classmethod takes 'cls'",
+            "@classmethod is for instance methods"
+        ],
+        "answer": "@classmethod takes 'cls' as first argument, @staticmethod takes nothing",
+        "level": "Senior"
+    },
+    {
+        "id": 9,
+        "question": "What are 'metaclasses' in Python?",
+        "options": [
+            "Classes that contain other classes",
+            "Classes that define how other classes behave",
+            "Shortcuts for inherits",
+            "None of the above"
+        ],
+        "answer": "Classes that define how other classes behave",
+        "level": "Senior"
+    },
+    {
+        "id": 10,
+        "question": "How does 'asyncio' work in Python?",
+        "options": [
+            "Multi-threading",
+            "Multi-processing",
+            "Single-threaded event loop using coroutines",
+            "Distributed computing"
+        ],
+        "answer": "Single-threaded event loop using coroutines",
+        "level": "Senior"
+    },
+    {
+        "id": 11,
+        "question": "Which method is used to implement context managers?",
+        "options": [
+            "__start__ and __end__",
+            "__init__ and __del__",
+            "__enter__ and __exit__",
+            "__open__ and __close__"
+        ],
+        "answer": "__enter__ and __exit__",
+        "level": "Intermediate"
+    },
+    {
+        "id": 12,
+        "question": "What is PEP 8?",
+        "options": [
+            "Python Enhancement Proposal for coding style",
+            "A version of Python",
+            "A library for data science",
+            "A security patch"
+        ],
+        "answer": "Python Enhancement Proposal for coding style",
+        "level": "Junior"
+    }
+]

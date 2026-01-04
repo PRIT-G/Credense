@@ -1,0 +1,86 @@
+[
+    {
+        "id": 1,
+        "question": "What is 'Supervised Learning'?",
+        "options": [
+            "Learning with a teacher",
+            "Learning with labeled data",
+            "Learning with unlabeled data",
+            "Learning by trial and error"
+        ],
+        "answer": "Learning with labeled data",
+        "level": "Junior"
+    },
+    {
+        "id": 2,
+        "question": "What is 'Overfitting'?",
+        "options": [
+            "When a model is too simple",
+            "When a model learns the training data too well, including the noise",
+            "When the model cannot learn",
+            "When the data is too large"
+        ],
+        "answer": "When a model learns the training data too well, including the noise",
+        "level": "Junior"
+    },
+    {
+        "id": 3,
+        "question": "What is the purpose of a 'Validation Set'?",
+        "options": [
+            "To train the model",
+            "To tune hyperparameters and prevent overfitting",
+            "To test the model final performance",
+            "To clean data"
+        ],
+        "answer": "To tune hyperparameters and prevent overfitting",
+        "level": "Intermediate"
+    },
+    {
+        "id": 4,
+        "question": "What is 'Cross-Validation'?",
+        "options": [
+            "Checking data again",
+            "A resampling procedure used to evaluate machine learning models on a limited data sample",
+            "Merging datasets",
+            "Validating with another person"
+        ],
+        "answer": "A resampling procedure used to evaluate machine learning models on a limited data sample",
+        "level": "Intermediate"
+    },
+    {
+        "id": 5,
+        "question": "What is 'Regularization' used for?",
+        "options": [
+            "To speed up training",
+            "To prevent overfitting by adding a penalty term to the loss function",
+            "To fix errors",
+            "To normalize data"
+        ],
+        "answer": "To prevent overfitting by adding a penalty term to the loss function",
+        "level": "Intermediate"
+    },
+    {
+        "id": 6,
+        "question": "What is the difference between L1 and L2 regularization?",
+        "options": [
+            "No difference",
+            "L1 adds absolute value penalty, L2 adds squared value penalty",
+            "L2 is for classification only",
+            "L1 is faster"
+        ],
+        "answer": "L1 adds absolute value penalty, L2 adds squared value penalty",
+        "level": "Senior"
+    },
+    {
+        "id": 7,
+        "question": "What are 'Hyperparameters'?",
+        "options": [
+            "Weights learned by the model",
+            "Parameters whose value is set before the learning process begins",
+            "Very large parameters",
+            "Parameters in neural networks only"
+        ],
+        "answer": "Parameters whose value is set before the learning process begins",
+        "level": "Senior"
+    }
+]

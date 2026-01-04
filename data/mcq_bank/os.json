@@ -1,0 +1,74 @@
+[
+    {
+        "id": 1,
+        "question": "What is 'Thrashing' in an OS?",
+        "options": [
+            "Deleting files",
+            "A state where the CPU spends more time swapping pages than executing processes",
+            "A virus attack",
+            "Hardware failure"
+        ],
+        "answer": "A state where the CPU spends more time swapping pages than executing processes",
+        "level": "Intermediate"
+    },
+    {
+        "id": 2,
+        "question": "What is a 'SemaPhore' used for?",
+        "options": [
+            "To speed up filesystems",
+            "To manage access to shared resources in concurrent systems",
+            "To display errors",
+            "To manage memory allocation"
+        ],
+        "answer": "To manage access to shared resources in concurrent systems",
+        "level": "Intermediate"
+    },
+    {
+        "id": 3,
+        "question": "What is 'Deadlock'?",
+        "options": [
+            "A state where a set of processes are blocked because each process is holding a resource and waiting for another resource acquired by some other process",
+            "A security feature",
+            "When a computer is turned off",
+            "When the hard drive fails"
+        ],
+        "answer": "A state where a set of processes are blocked because each process is holding a resource and waiting for another resource acquired by some other process",
+        "level": "Intermediate"
+    },
+    {
+        "id": 4,
+        "question": "Which scheduling algorithm can lead to starvation?",
+        "options": [
+            "Round Robin",
+            "Priority Scheduling",
+            "FCFS",
+            "SJF"
+        ],
+        "answer": "Priority Scheduling",
+        "level": "Senior"
+    },
+    {
+        "id": 5,
+        "question": "What is 'Virtual Memory'?",
+        "options": [
+            "Memory on the cloud",
+            "A technique that allows the execution of processes that are not completely in main memory",
+            "RAM attached via USB",
+            "Temporary files"
+        ],
+        "answer": "A technique that allows the execution of processes that are not completely in main memory",
+        "level": "Junior"
+    },
+    {
+        "id": 6,
+        "question": "What is 'Kernel' in an OS?",
+        "options": [
+            "A user interface",
+            "The core part of the OS that manages hardware and system resources",
+            "A type of application",
+            "A browser"
+        ],
+        "answer": "The core part of the OS that manages hardware and system resources",
+        "level": "Junior"
+    }
+]

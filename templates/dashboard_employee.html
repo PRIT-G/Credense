@@ -1,0 +1,69 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <title>Employee Dashboard - ValidAIte</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/style.css') }}">
+</head>
+
+<body>
+    <div class="container">
+        <header style="display: flex; justify-content: space-between; align-items: center;">
+            <a href="/" class="logo">Valid<span>AI</span>te</a>
+            <nav>
+                <span style="margin-right: 1rem; color: #ccc;">Hello, {{ user.name }}</span>
+                <a href="{{ url_for('auth.logout') }}" class="btn btn-secondary" style="font-size: 0.9rem;">Logout</a>
+            </nav>
+        </header>
+
+        <section style="margin-top: 2rem;">
+            <h2>Employee Dashboard</h2>
+            <div
+                style="display: grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); gap: 2rem; margin-top: 2rem;">
+
+                <!-- Resume Section -->
+                <div class="glass-card">
+                    <h3>Resume Status</h3>
+                    {% if user.get('resume_uploaded') %}
+                    <p style="color: #51cf66; margin: 1rem 0;">Resume Uploaded Successfully</p>
+                    <!-- Add actions if needed like view or re-upload -->
+                    <a href="{{ url_for('upload.upload_page') }}" class="btn btn-secondary">Update Resume</a>
+                    {% else %}
+                    <p style="margin: 1rem 0;">No resume uploaded yet.</p>
+                    <a href="{{ url_for('upload.upload_page') }}" class="btn btn-primary">Upload Resume</a>
+                    {% endif %}
+                </div>
+
+                <!-- Test Section -->
+                <div class="glass-card">
+                    <h3>Skill Assessments</h3>
+                    {% if user.get('scores') %}
+                    <ul style="list-style: none; padding: 0;">
+                        {% for skill, score in user.scores.items() %}
+                        <li style="margin-bottom: 0.5rem; display: flex; justify-content: space-between;">
+                            <span>{{ skill }}</span>
+                            <span style="font-weight: bold; color: var(--primary);">{{ score }}%</span>
+                        </li>
+                        {% endfor %}
+                    </ul>
+                    {% else %}
+                    <p>No tests taken yet.</p>
+                    {% endif %}
+
+                    {% if user.get('resume_uploaded') %}
+                    <div style="margin-top: 1rem;">
+                        <h4>Available Tests</h4>
+                        <!-- Logic to show tests based on detected skills would go here usually, 
+                                 or just link to a general test page -->
+                        <p style="font-size: 0.9rem; color: #aaa;">Tests will appear here after resume analysis.</p>
+                    </div>
+                    {% endif %}
+                </div>
+
+            </div>
+        </section>
+    </div>
+</body>
+
+</html>

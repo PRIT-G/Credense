@@ -1,0 +1,68 @@
+{
+    "admin": {
+        "password": "admin123",
+        "role": "admin",
+        "name": "System Admin"
+    },
+    "pritgadhiya07@gmail.com": {
+        "password": "PRIT",
+        "role": "employee",
+        "name": "PRIT",
+        "resume_uploaded": true,
+        "resume_path": "Khanjan-Soni-Resume.pdf",
+        "detected_skills": [
+            "computernetwork",
+            "sql",
+            "web",
+            "dbms",
+            "c"
+        ],
+        "scores": {
+            "Assessment 2026-01-03 23:53": 0,
+            "Assessment 2026-01-03 23:54": 0,
+            "Assessment 2026-01-04 09:27": 20,
+            "Assessment 2026-01-04 09:53": 26,
+            "Assessment 2026-01-04 10:02": 86,
+            "Assessment 2026-01-04 10:15": 88,
+            "Assessment 2026-01-04 10:18": 55
+        },
+        "expertise_level": "Senior"
+    },
+    "event": {
+        "password": "1",
+        "role": "recruiter",
+        "name": "R"
+    },
+    "E1": {
+        "password": "E1",
+        "role": "employee",
+        "name": "GADHIYA PRIT",
+        "resume_uploaded": true,
+        "resume_path": "Vraj_Upadhyay_Resume_1.pdf",
+        "detected_skills": [
+            "sql",
+            "c",
+            "dsa",
+            "web"
+        ],
+        "scores": {
+            "Assessment 2026-01-04 00:12": 16,
+            "Assessment 2026-01-04 00:16": 0,
+            "Assessment 2026-01-04 00:37": 0,
+            "Assessment 2026-01-04 10:31": 0,
+            "Assessment 2026-01-04 10:44": 0,
+            "Assessment 2026-01-04 10:51": 0
+        },
+        "expertise_level": "Senior"
+    },
+    "RUDRA": {
+        "password": "R2",
+        "role": "admin",
+        "name": "RUDRA"
+    },
+    "event1": {
+        "password": "1",
+        "role": "recruiter",
+        "name": "R"
+    }
+}
