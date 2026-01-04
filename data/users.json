@@ -4,12 +4,12 @@
         "role": "admin",
         "name": "System Admin"
     },
-    "pritgadhiya07@gmail.com": {
-        "password": "PRIT",
+    "E2": {
+        "password": "E2",
         "role": "employee",
-        "name": "PRIT",
+        "name": "E2",
         "resume_uploaded": true,
-        "resume_path": "Khanjan-Soni-Resume.pdf",
+        "resume_path": "test1.pdf",
         "detected_skills": [
             "computernetwork",
             "sql",
@@ -36,9 +36,9 @@
     "E1": {
         "password": "E1",
         "role": "employee",
-        "name": "GADHIYA PRIT",
+        "name": "E1",
         "resume_uploaded": true,
-        "resume_path": "Vraj_Upadhyay_Resume_1.pdf",
+        "resume_path": "test4.pdf",
         "detected_skills": [
             "sql",
             "c",
@@ -55,10 +55,10 @@
         },
         "expertise_level": "Senior"
     },
-    "RUDRA": {
-        "password": "R2",
+    "admin2": {
+        "password": "admin123",
         "role": "admin",
-        "name": "RUDRA"
+        "name": "admin2"
     },
     "event1": {
         "password": "1",
