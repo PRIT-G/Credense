@@ -4,121 +4,47 @@
 <head>
     <meta charset="UTF-8">
     <title>Recruiter Dashboard - ValidAIte</title>
-    <link rel="stylesheet" href="{{ url_for('static', filename='css/style.css') }}">
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/style.css', v=2) }}">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
     <style>
-        .data-table {
-            width: 100%;
-            border-collapse: collapse;
-            color: #fff;
-            margin-bottom: 2rem;
-        }
-
-        .data-table th,
-        .data-table td {
-            text-align: left;
-            padding: 10px;
-            border-bottom: 1px solid rgba(255, 255, 255, 0.1);
-        }
-
-        .data-table th {
-            background-color: rgba(255, 255, 255, 0.05);
-        }
-
-        .high-score {
-            color: #fab005;
-            font-weight: bold;
-        }
-
-        .tabs {
-            display: flex;
-            gap: 1rem;
-            margin-bottom: 1rem;
-        }
-
-        .tab-btn {
-            background: transparent;
-            border: 1px solid var(--border);
-            color: #ccc;
-            padding: 8px 16px;
-            cursor: pointer;
-            border-radius: 4px;
-        }
-
-        .tab-btn.active {
-            background: var(--primary);
-            color: white;
-            border-color: var(--primary);
-        }
-
-        .tab-content {
-            display: none;
-        }
-
-        .tab-content.active {
-            display: block;
-        }
-
-        .modal {
-            display: none;
-            position: fixed;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
-            background: rgba(0, 0, 0, 0.7);
-            align-items: center;
-            justify-content: center;
-            z-index: 1000;
-        }
-
-        .modal-content {
-            background: var(--bg-card);
-            padding: 2rem;
-            border-radius: 10px;
-            width: 500px;
-            border: 1px solid var(--border);
-            max-height: 80vh;
-            overflow-y: auto;
-        }
-
-        input,
-        textarea,
-        select {
-            background: var(--bg-card);
-            border: 1px solid var(--border);
-            color: white;
-            padding: 8px;
-            border-radius: 4px;
-        }
-
+        /* Specific tweaks for recruiter dashboard if needed, but mostly using global */
         .question-card {
-            background: rgba(255, 255, 255, 0.05);
-            padding: 15px;
-            margin-bottom: 10px;
-            border-radius: 8px;
+            background: #fff;
+            border: 1px solid #e9ecef;
+            padding: 1rem;
+            margin-bottom: 1rem;
+            border-radius: 12px;
+            box-shadow: 0 2px 4px rgba(0,0,0,0.05);
+        }
+        .filter-controls {
+            display: flex;
+            gap: 10px;
+            align-items: center;
+            margin-bottom: 1rem;
+            background: #fff;
+            padding: 1rem;
+            border-radius: 12px;
+            border: 1px solid #e9ecef;
         }
     </style>
 </head>
 
 <body>
     <div class="container">
-        <header style="display: flex; justify-content: space-between; align-items: center;">
+        <header style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 2rem;">
             <a href="/" class="logo">Valid<span>AI</span>te</a>
-            <nav>
-                <span style="margin-right: 1rem; color: #ccc;">Recruiter Dashboard</span>
-                <a href="{{ url_for('auth.logout') }}" class="btn btn-secondary">Logout</a>
+            <nav style="display: flex; align-items: center; gap: 1rem;">
+                <span style="color: var(--text-gray); font-weight: 500;">Recruiter Dashboard</span>
+                <a href="{{ url_for('auth.logout') }}" class="btn btn-primary" style="padding: 8px 20px; font-size: 0.9rem;">Logout</a>
             </nav>
         </header>
 
-        <section style="margin-top: 2rem;">
+        <section>
             {% with messages = get_flashed_messages(with_categories=true) %}
             {% if messages %}
-            <ul class="flashes" style="list-style: none; padding: 0; margin-bottom: 1rem;">
-                {% for category, message in messages %}
-                <li class="{{ category }}"
-                    style="color: {% if category == 'error' %}#ff6b6b{% else %}#51cf66{% endif %};">{{ message }}</li>
-                {% endfor %}
+            <ul class="flashes" style="margin-bottom: 1.5rem;">
+                {% set category, message = messages[-1] %}
+                <li class="{{ category }}">{{ message }}</li>
             </ul>
             {% endif %}
             {% endwith %}
@@ -128,111 +54,149 @@
                 <button class="tab-btn" onclick="openTab(event, 'questions')">Manage Questions</button>
             </div>
 
-            <div id="employees" class="tab-content active glass-card">
-                <h3>Employee Performance</h3>
-                <table class="data-table">
-                    <thead>
-                        <tr>
-                            <th>Name</th>
-                            <th>Username</th>
-                            <th>Scores</th>
-                            <th>Credentials</th>
-                        </tr>
-                    </thead>
-                    <tbody>
-                        {% for username, employee in employees.items() %}
-                        <tr>
-                            <td>{{ employee.name }}</td>
-                            <td>{{ username }}</td>
-                            <td>
+            <!-- Employees Tab -->
+            <div id="employees" class="tab-content active">
+                <div class="auth-card" style="max-width: 100%;">
+                    <h3 style="margin-bottom: 1.5rem; color: var(--text-white);">Candidate Performance</h3>
+                    
+                    <div class="filter-controls">
+                        <label style="font-weight: 600; color: var(--text-gray);">Shortlist Filter:</label>
+                        <input type="number" id="minScoreMsg" placeholder="Min Score %" class="form-control" style="width: 150px; margin-bottom: 0;">
+                        <button onclick="filterCandidates()" class="btn btn-primary" style="padding: 10px 20px;">Filter</button>
+                        <button onclick="resetFilter()" class="btn" style="padding: 10px 20px; background: transparent; color: var(--text-gray); border: 1px solid var(--border);">Reset</button>
+                    </div>
+
+                    <table class="admin-table" id="candidateTable">
+                        <thead>
+                            <tr>
+                                <th>Name</th>
+                                <th>Username</th>
+                                <th>Avg Score</th>
+                                <th>Details</th>
+                                <th>Actions</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            {% for username, employee in employees.items() %}
+                                {% set avg_score = 0 %}
+                                {% set count = 0 %}
+                                {% set total = 0 %}
                                 {% if employee.scores %}
-                                {% for skill, score in employee.scores.items() %}
-                                <div>{{ skill }}: <span class="{{ 'high-score' if score|int > 80 else '' }}">{{ score
-                                        }}%</span></div>
-                                {% endfor %}
-                                {% else %}
-                                <span style="color: #aaa;">No tests taken</span>
+                                    {% for s in employee.scores.values() %}
+                                        {% set total = total + s|int %}
+                                        {% set count = count + 1 %}
+                                    {% endfor %}
+                                    {% if count > 0 %}
+                                        {% set avg_score = (total / count)|round(1) %}
+                                    {% endif %}
                                 {% endif %}
-                            </td>
-                            <td style="font-family: monospace; font-size: 0.8rem;">
-                                {{ employee.password }}
-                            </td>
-                        </tr>
-                        {% endfor %}
-                    </tbody>
-                </table>
+                                
+                            <tr class="candidate-row" data-avg-score="{{ avg_score }}">
+                                <td>{{ employee.name }}</td>
+                                <td>{{ username }}</td>
+                                <td>
+                                    {% if count > 0 %}
+                                        <span class="badge" style="background: {{ 'rgba(44, 182, 125, 0.1)' if avg_score >= 70 else 'rgba(255, 166, 0, 0.1)' }}; color: {{ '#2cb67d' if avg_score >= 70 else 'orange' }}; font-size: 0.9rem;">
+                                            {{ avg_score }}%
+                                        </span>
+                                    {% else %}
+                                        <span style="color: #ccc;">N/A</span>
+                                    {% endif %}
+                                </td>
+                                <td>
+                                    {% if employee.scores %}
+                                    <div style="font-size: 0.85rem; color: var(--text-gray);">
+                                        {% for skill, score in employee.scores.items() %}
+                                        <span>{{ skill }}: <b>{{ score }}%</b></span><br>
+                                        {% endfor %}
+                                    </div>
+                                    {% else %}
+                                    <small style="color: #ccc;">No tests taken</small>
+                                    {% endif %}
+                                </td>
+                                <td>
+                                    <a href="{{ url_for('recruiter.delete_candidate', username=username) }}" 
+                                       class="action-btn btn-delete"
+                                       onclick="return confirm('Are you sure you want to remove this candidate? This cannot be undone.');">
+                                        <i class="fas fa-trash"></i> Remove
+                                    </a>
+                                </td>
+                            </tr>
+                            {% endfor %}
+                        </tbody>
+                    </table>
+                </div>
             </div>
 
-            <div id="questions" class="tab-content glass-card">
-                <h3>Question Bank</h3>
-
-                <div style="margin-bottom: 2rem; border-bottom: 1px solid var(--border); padding-bottom: 2rem;">
-                    <h4>Add New Question</h4>
-                    <form action="{{ url_for('recruiter.add_question') }}" method="post"
-                        style="display: grid; gap: 10px;">
-                        <label>Skill (Type to add new)</label>
-                        <input type="text" name="skill" list="skill_suggestions" required style="width: 100%;"
-                            placeholder="e.g. Java, C++, Cloud">
-                        <datalist id="skill_suggestions">
-                            <option value="python">
-                            <option value="sql">
-                            <option value="ml">
-                            <option value="dsa">
-                            <option value="web">
-                            <option value="c">
-                            <option value="cpp">
-                            <option value="java">
-                            <option value="computernetwork">
-                            <option value="os">
-                            <option value="cloud">
-                        </datalist>
-
-                        <textarea name="question" placeholder="Question Text" required style="width: 100%;"></textarea>
-
-                        <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 10px;">
-                            <input type="text" name="option1" placeholder="Option 1" required>
-                            <input type="text" name="option2" placeholder="Option 2" required>
-                            <input type="text" name="option3" placeholder="Option 3" required>
-                            <input type="text" name="option4" placeholder="Option 4" required>
+            <!-- Questions Tab -->
+            <div id="questions" class="tab-content">
+                <div class="auth-card" style="max-width: 100%; margin-bottom: 2rem;">
+                    <h3 style="margin-bottom: 1.5rem; color: var(--primary);">Add New Question</h3>
+                    <form action="{{ url_for('recruiter.add_question') }}" method="post">
+                        <div class="form-group">
+                            <label>Skill Category</label>
+                            <input type="text" name="skill" list="skill_suggestions" class="form-control" placeholder="e.g. Python, Java, Cloud" required>
+                            <datalist id="skill_suggestions">
+                                <option value="Python"><option value="Java"><option value="SQL"><option value="Cloud">
+                                <option value="DSA"><option value="Machine Learning">
+                            </datalist>
                         </div>
 
-                        <input type="text" name="correct_answer" placeholder="Correct Answer (Copy exact option text)"
-                            required style="width: 100%;">
+                        <div class="form-group">
+                            <label>Question Text</label>
+                            <textarea name="question" class="form-control" rows="3" placeholder="Enter the question here..." required></textarea>
+                        </div>
 
-                        <button type="submit" class="btn btn-primary" style="width: auto; justify-self: start;">Add
-                            Question</button>
+                        <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 1rem; margin-bottom: 1rem;">
+                            <input type="text" name="option1" class="form-control" placeholder="Option A" required>
+                            <input type="text" name="option2" class="form-control" placeholder="Option B" required>
+                            <input type="text" name="option3" class="form-control" placeholder="Option C" required>
+                            <input type="text" name="option4" class="form-control" placeholder="Option D" required>
+                        </div>
+
+                        <div class="form-group">
+                            <label>Correct Answer (Must match one option exactly)</label>
+                            <input type="text" name="correct_answer" class="form-control" placeholder="Copy the correct option text here" required>
+                        </div>
+
+                        <button type="submit" class="btn btn-primary">Add Question</button>
                     </form>
                 </div>
 
-                <h4>Existing Questions</h4>
-                {% for skill, questions in questions_data.items() %}
-                <div style="margin-bottom: 1rem;">
-                    <h5 style="color: var(--primary); text-transform: uppercase;">{{ skill }} ({{ questions|length }})
-                    </h5>
-                    <div style="max-height: 300px; overflow-y: auto;">
+                <!-- Existing Questions List -->
+                <div class="auth-card" style="max-width: 100%;">
+                    <h3 style="margin-bottom: 1.5rem; color: var(--text-white);">Question Bank</h3>
+                    {% for skill, questions in questions_data.items() %}
+                    <div style="margin-bottom: 2rem;">
+                        <h4 style="color: var(--primary); border-bottom: 2px solid #eef2f6; padding-bottom: 0.5rem; margin-bottom: 1rem;">
+                            {{ skill }} <span style="font-size: 0.9rem; color: var(--text-gray); font-weight: 400;">({{ questions|length }} questions)</span>
+                        </h4>
+                        
                         {% for q in questions %}
                         <div class="question-card">
-                            <p style="font-weight: bold; margin-bottom: 0.5rem;">{{ loop.index }}. {{ q.question }}</p>
-                            <ul style="padding-left: 1.5rem; margin-bottom: 0.5rem; font-size: 0.9rem; color: #ccc;">
+                            <div style="display: flex; justify-content: space-between; align-items: start;">
+                                <p style="font-weight: 600; margin-bottom: 0.5rem; color: var(--text-white);">{{ loop.index }}. {{ q.question }}</p>
+                                <div style="display: flex; gap: 5px;">
+                                    <button class="action-btn btn-update"
+                                        data-skill="{{ skill }}" data-question="{{ q|tojson|forceescape }}"
+                                        onclick="openEditModal(this)"><i class="fas fa-edit"></i></button>
+                                    <a href="{{ url_for('recruiter.delete_question', skill=skill, q_id=q.id) }}"
+                                        class="action-btn btn-delete"
+                                        onclick="return confirm('Delete this question?')"><i class="fas fa-trash"></i></a>
+                                </div>
+                            </div>
+                            <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 5px; font-size: 0.9rem;">
                                 {% for opt in q.options %}
-                                <li {% if opt==q.answer %}style="color: #51cf66;" {% endif %}>{{ opt }}</li>
+                                <div style="padding: 4px 8px; border-radius: 4px; background: {{ '#d3f9d8' if opt == q.answer else '#f8f9fa' }}; color: {{ '#0b7285' if opt == q.answer else 'var(--text-gray)' }};">
+                                    {{ opt }}
+                                </div>
                                 {% endfor %}
-                            </ul>
-                            <div style="display: flex; gap: 10px;">
-                                <button class="btn btn-update"
-                                    style="padding: 4px 8px; font-size: 0.8rem; background: #fab005; color: black;"
-                                    data-skill="{{ skill }}" data-question="{{ q|tojson|forceescape }}"
-                                    onclick="openEditModal(this)">Edit</button>
-                                <a href="{{ url_for('recruiter.delete_question', skill=skill, q_id=q.id) }}"
-                                    class="btn btn-delete"
-                                    style="padding: 4px 8px; font-size: 0.8rem; background: #ff6b6b; color: white; text-decoration: none; border-radius: 4px;"
-                                    onclick="return confirm('Delete this question?')">Delete</a>
                             </div>
                         </div>
                         {% endfor %}
                     </div>
+                    {% endfor %}
                 </div>
-                {% endfor %}
             </div>
         </section>
     </div>
@@ -240,26 +204,30 @@
     <!-- Edit Modal -->
     <div id="editModal" class="modal">
         <div class="modal-content">
-            <h3 style="margin-bottom: 1rem;">Edit Question</h3>
-            <form action="{{ url_for('recruiter.edit_question') }}" method="post" style="display: grid; gap: 10px;">
+            <h3 style="margin-bottom: 1.5rem; color: var(--text-white);">Edit Question</h3>
+            <form action="{{ url_for('recruiter.edit_question') }}" method="post">
                 <input type="hidden" name="skill" id="editSkill">
                 <input type="hidden" name="q_id" id="editQId">
 
-                <label>Question</label>
-                <textarea name="question" id="editQuestion" required style="width: 100%; rows: 3;"></textarea>
-
-                <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 10px;">
-                    <input type="text" name="option1" id="editOpt1" required>
-                    <input type="text" name="option2" id="editOpt2" required>
-                    <input type="text" name="option3" id="editOpt3" required>
-                    <input type="text" name="option4" id="editOpt4" required>
+                <div class="form-group">
+                    <label>Question</label>
+                    <textarea name="question" id="editQuestion" class="form-control" rows="3" required></textarea>
                 </div>
 
-                <label>Correct Answer</label>
-                <input type="text" name="correct_answer" id="editAnswer" required style="width: 100%;">
+                <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 10px; margin-bottom: 1rem;">
+                    <input type="text" name="option1" id="editOpt1" class="form-control" placeholder="Option A" required>
+                    <input type="text" name="option2" id="editOpt2" class="form-control" placeholder="Option B" required>
+                    <input type="text" name="option3" id="editOpt3" class="form-control" placeholder="Option C" required>
+                    <input type="text" name="option4" id="editOpt4" class="form-control" placeholder="Option D" required>
+                </div>
 
-                <div style="display: flex; justify-content: flex-end; gap: 10px; margin-top: 1rem;">
-                    <button type="button" class="btn btn-secondary" onclick="closeEditModal()">Cancel</button>
+                <div class="form-group">
+                    <label>Correct Answer</label>
+                    <input type="text" name="correct_answer" id="editAnswer" class="form-control" required>
+                </div>
+
+                <div style="display: flex; justify-content: flex-end; gap: 10px; margin-top: 1.5rem;">
+                    <button type="button" class="btn" style="background: transparent; color: var(--text-gray);" onclick="closeEditModal()">Cancel</button>
                     <button type="submit" class="btn btn-primary">Save Changes</button>
                 </div>
             </form>
@@ -272,15 +240,37 @@
             tabcontent = document.getElementsByClassName("tab-content");
             for (i = 0; i < tabcontent.length; i++) {
                 tabcontent[i].style.display = "none";
-                tabcontent[i].classList.remove("active");
+                tabcontent[i].className = tabcontent[i].className.replace(" active", "");
             }
             tablinks = document.getElementsByClassName("tab-btn");
             for (i = 0; i < tablinks.length; i++) {
                 tablinks[i].className = tablinks[i].className.replace(" active", "");
             }
             document.getElementById(tabName).style.display = "block";
-            document.getElementById(tabName).classList.add("active");
+            document.getElementById(tabName).className += " active";
             evt.currentTarget.className += " active";
+        }
+
+        function filterCandidates() {
+            const minScore = parseFloat(document.getElementById('minScoreMsg').value) || 0;
+            const rows = document.getElementsByClassName('candidate-row');
+            
+            for (let row of rows) {
+                const score = parseFloat(row.getAttribute('data-avg-score')) || 0;
+                if (score < minScore) {
+                    row.style.display = 'none';
+                } else {
+                    row.style.display = '';
+                }
+            }
+        }
+
+        function resetFilter() {
+            document.getElementById('minScoreMsg').value = '';
+            const rows = document.getElementsByClassName('candidate-row');
+            for (let row of rows) {
+                row.style.display = '';
+            }
         }
 
         function openEditModal(btn) {
@@ -307,17 +297,16 @@
                 closeEditModal();
             }
         }
-
+        
+        // Auto-switch tab if URL param present
         document.addEventListener('DOMContentLoaded', function () {
             const urlParams = new URLSearchParams(window.location.search);
             const tabName = urlParams.get('tab');
             if (tabName === 'questions') {
-                // Simulate click on the questions tab button
                 const btn = document.querySelector('.tab-btn[onclick*="questions"]');
                 if (btn) btn.click();
             }
         });
     </script>
 </body>
-
 </html>

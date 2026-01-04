@@ -137,3 +137,18 @@ def edit_question():
         flash('Question updated.', 'success')
     
     return redirect(url_for('recruiter.dashboard', tab='questions'))
+@recruiter_bp.route('/recruiter/delete_candidate/<username>')
+@login_required_recruiter
+def delete_candidate(username):
+    # Security check: Ensure we only delete employees, not admins or other recruiters
+    # (unless we want to allow that, but safer to restrict)
+    user = user_manager.get_user(username)
+    if user and user.get('role') == 'employee':
+        if user_manager.delete_user(username):
+            flash(f'Candidate {username} deleted successfully.', 'success')
+        else:
+            flash('Failed to delete user.', 'error')
+    else:
+        flash('Cannot delete this user (Invalid permission or user not found).', 'error')
+        
+    return redirect(url_for('recruiter.dashboard'))

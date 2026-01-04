@@ -1,50 +1,62 @@
 <!DOCTYPE html>
 <html lang="en">
-
 <head>
     <meta charset="UTF-8">
     <title>Register - ValidAIte</title>
-    <link rel="stylesheet" href="{{ url_for('static', filename='css/style.css') }}">
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/style.css', v=2) }}">
 </head>
-
 <body class="auth-screen">
     <div class="auth-card">
-        <header style="margin-bottom: 3rem; text-align: center;">
+        <header style="margin-bottom: 0.5rem; text-align: center;">
             <a href="/" class="logo" style="font-size: 2rem;">Valid<span>AI</span>te</a>
         </header>
 
         <section>
-            <h2 style="margin-bottom: 2.5rem; text-align: center; font-size: 2.2rem; font-weight: 700;">Create Account
-            </h2>
+            <h2 style="margin-bottom: 1rem; text-align: center; font-size: 1.8rem; font-weight: 700;">Create Account</h2>
 
+            {% with messages = get_flashed_messages(with_categories=true) %}
+            {% if messages %}
+            <ul class="flashes">
+                {% set category, message = messages[-1] %}
+                <li class="{{ category }}">{{ message }}</li>
+            </ul>
+            {% endif %}
+            {% endwith %}
 
             <form action="{{ url_for('auth.register') }}" method="post">
                 <div class="form-group">
+                    <label>I am a...</label>
+                    <select name="role" class="form-control" required style="cursor: pointer;">
+                        <option value="employee">Candidate (Student/Employee)</option>
+                        <option value="recruiter">Recruiter</option>
+                        <option value="admin">System Admin</option>
+                    </select>
+                </div>
+
+                <div class="form-group">
                     <label>Full Name</label>
-                    <input type="text" name="name" class="form-control" required placeholder="Enter your full name">
+                    <input type="text" name="name" class="form-control" placeholder="John Doe" required>
                 </div>
 
                 <div class="form-group">
                     <label>Username</label>
-                    <input type="text" name="username" class="form-control" required
-                        placeholder="Choose a unique username">
+                    <input type="text" name="username" class="form-control" placeholder="Choose a username" required>
                 </div>
 
-                <div class="form-group" style="margin-bottom: 3rem;">
+                <div class="form-group">
                     <label>Password</label>
-                    <input type="password" name="password" class="form-control" required
-                        placeholder="Create a strong password">
+                    <input type="password" name="password" class="form-control" placeholder="Create a password" required>
                 </div>
 
-                <button type="submit" class="btn btn-primary"
-                    style="width: 100%; padding: 18px; font-size: 1.2rem; border-radius: 12px;">Sign Up Now</button>
+                <button type="submit" class="btn btn-primary" style="width: 100%; padding: 12px; font-size: 1.1rem; border-radius: 12px; margin-top: 1rem;">
+                    Sign Up
+                </button>
             </form>
-            <p style="margin-top: 2.5rem; text-align: center; color: var(--text-gray); font-size: 1.05rem;">
-                Already have an account? <a href="{{ url_for('auth.login') }}"
-                    style="color: var(--primary); text-decoration: none; font-weight: 700; margin-left: 5px;">Login</a>
+            
+            <p style="margin-top: 0.8rem; text-align: center; color: var(--text-gray); font-size: 0.9rem;">
+                Already have an account? <a href="{{ url_for('auth.login') }}" style="color: var(--primary); text-decoration: none; font-weight: 700;">Login</a>
             </p>
         </section>
     </div>
 </body>
-
 </html>

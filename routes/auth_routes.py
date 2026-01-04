@@ -30,6 +30,12 @@ def login():
         # Authenticate User
         user = user_manager.authenticate(username, password)
         if user:
+            # Validate Role Selection
+            selected_role = request.form.get('role')
+            if selected_role and user.get('role') != selected_role:
+                flash(f'Invalid role selected. You are not a {selected_role}.', 'error')
+                return redirect(url_for('auth.login'))
+
             session['user'] = user
             flash(f"Welcome back, {user.get('name', username)}!", 'success')
             
@@ -63,12 +69,13 @@ def register():
         username = request.form.get('username')
         password = request.form.get('password')
         name = request.form.get('name')
+        role = request.form.get('role', 'employee') # Default to employee if missing
         
         if not username or not password:
              flash('Username and password are required.', 'error')
              return redirect(url_for('auth.register'))
 
-        if user_manager.create_user(username, password, role='employee', name=name):
+        if user_manager.create_user(username, password, role=role, name=name):
             flash('Registration successful! Please login.', 'success')
             return redirect(url_for('auth.login'))
         else:
