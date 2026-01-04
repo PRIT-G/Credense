@@ -120,8 +120,7 @@
         </header>
 
         <section style="margin-top: 2rem;">
-            {% with messages = get_flashed_messages(with_categories=true) %}
-            {% if messages %}
+            
             <ul class="flashes" style="list-style: none; padding: 0; margin-bottom: 1rem;">
                 {% for category, message in messages %}
                 <li class="{{ category }}"
