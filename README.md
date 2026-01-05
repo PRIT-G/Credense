@@ -1,6 +1,4 @@
-====================================================================
-                          RESUME AUTHENTICATION
-====================================================================
+<h1 style="color:red;"><center>RESUME AUTHENTICATION</center></h1>
 
 Resume Authentication is a Python-based backend system designed to
 authenticate, verify, and manage resumes efficiently. It provides
@@ -40,7 +38,7 @@ TABLE OF CONTENTS
 --------------------------------------------------------------------
 Backend Language   : Python
 Framework          : Flask (via app.py)
-Frontend           : HTML, CSS (if applicable)
+Frontend           : HTML, CSS,Javascript(if applicable)
 Database           : Configurable (SQLite / MySQL / MongoDB, etc.)
 Dependencies       : Defined in requirements.txt
 
@@ -122,12 +120,12 @@ GET    /resumes/<id>/status   -> Get verification status
 --------------------------------------------------------------------
 8. USAGE WORKFLOW
 --------------------------------------------------------------------
-1. User registers and logs in
-2. User uploads resume
-3. Verification request is initiated
-4. System processes verification
-5. User checks verification status
-6. Admin reviews (if applicable)
+  1. User registers and logs in
+  2. User uploads resume
+  3. Verification request is initiated
+  4. System processes verification
+  5. User checks verification status
+  6. Admin reviews (if applicable)
 
 --------------------------------------------------------------------
 9. CONTRIBUTING
@@ -136,11 +134,11 @@ Contributions are welcome.
 
 Steps:
 ------------------------------------------------
-1. Fork the repository
-2. Create a new branch (feature/your-feature)
-3. Commit your changes
-4. Open a Pull Request
-5. Ensure clean code and proper documentation
+  1. Fork the repository
+  2. Create a new branch (feature/your-feature)
+  3. Commit your changes
+  4. Open a Pull Request
+  5. Ensure clean code and proper documentation
 
 --------------------------------------------------------------------
 10. LICENSE
@@ -148,6 +146,4 @@ Steps:
 This project is licensed under the MIT License.
 See the LICENSE file for more details.
 
-====================================================================
-END OF FILE
-====================================================================
+
