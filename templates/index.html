@@ -4,7 +4,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Resume Authenticity AI</title>
+    <title>Credense - AI Resume Analyzer</title>
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap">
     <link rel="stylesheet" href="{{ url_for('static', filename='css/style.css') }}">
@@ -15,7 +15,7 @@
 <body>
     <div class="container">
         <header>
-            <a href="/" class="logo">Valid<span>AI</span>te</a>
+            <a href="/" class="logo">Credense</a>
             <nav>
                 {% if session.get('user') %}
                 <a href="{{ url_for('auth.logout') }}"

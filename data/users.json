@@ -87,24 +87,6 @@
             "Assessment 2026-01-04 21:36": 80
         }
     },
-    "acbx": {
-        "password": "R",
-        "role": "employee",
-        "name": "eggdg",
-        "resume_uploaded": true,
-        "resume_path": "Khanjan-Soni-Resume.pdf",
-        "detected_skills": [
-            "web",
-            "c",
-            "computernetwork",
-            "dbms",
-            "sql"
-        ],
-        "expertise_level": "Senior",
-        "scores": {
-            "Assessment 2026-01-04 23:07": 0
-        }
-    },
     "rudra_gohil_08": {
         "password": "R",
         "role": "recruiter",
