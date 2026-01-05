@@ -111,14 +111,19 @@ header {
 }
 
 .logo {
-    font-size: 1.5rem;
-    font-weight: 700;
-    color: var(--text-white);
+    font-size: 1.8rem;
+    font-weight: 800;
+    background: linear-gradient(135deg, var(--primary), var(--accent));
+    background-clip: text;
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
     text-decoration: none;
+    letter-spacing: -0.5px;
 }
 
+/* ValidAIte span rule is no longer needed but kept for safety or removed */
 .logo span {
-    color: var(--primary);
+    color: inherit;
 }
 
 /* Hero */
